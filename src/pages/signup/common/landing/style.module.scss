@@ -1,0 +1,149 @@
+@import "../../../../styles/sass/config/mixin";
+
+.title {
+  font-family: var(--font-2);
+  font-size: var(--font-size-36);
+  line-height: 110%;
+  font-weight: var(--font-semibold);
+  color: var(--clr-primary-black);
+  margin-bottom: var(--spacing-36);
+  max-width: 80%;
+}
+.cardWrap {
+  .userCardList {
+    margin-bottom: var(--spacing-16);
+    .journeyCard {
+      margin-bottom: var(--spacing-16);
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .journeyCard {
+    button {
+      display: flex;
+      width: 100%;
+      height: 100%;
+      padding: var(--spacing-16);
+      column-gap: var(--spacing-12);
+      border: 1px solid var(--clr-stroke-grey);
+      border-radius: 0.4rem;
+      background-color: var(--clr-white);
+      justify-content: space-between;
+      text-align: left;
+    }
+    a {
+      display: flex;
+      height: 100%;
+      padding: var(--spacing-16);
+      column-gap: var(--spacing-12);
+      border: 1px solid var(--clr-stroke-grey);
+      border-radius: 0.4rem;
+      background-color: var(--clr-white);
+      justify-content: space-between;
+    }
+    .userIcon {
+      background-color: var(--clr-grey-3);
+      flex-shrink: 0;
+      &.investor {
+        @include svg-icon("../../../../public/assets/icons/profile-icon.svg", 2.8rem, 2.8rem);
+      }
+      &.advisor {
+        @include svg-icon("../../../../public/assets/icons/profile-advisor.svg", 2.8rem, 2.8rem);
+      }
+      &.company {
+        @include svg-icon("../../../../public/assets/icons/profile-company.svg", 2.8rem, 2.8rem);
+      }
+    }
+    .arrowIcon {
+      flex-shrink: 0;
+      background-color: var(--clr-primary-black);
+      @include svg-icon("../../../../public/assets/icons/arrow-right.svg", 1.6rem, 1.6rem);
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+    .titleDescWrap {
+      flex-grow: 1;
+      strong {
+        display: block;
+        margin-bottom: var(--spacing-12);
+        font-size: var(--font-size-20);
+        color: var(--clr-primary-black);
+        line-height: 120%;
+        font-weight: var(--font-semibold);
+      }
+      p {
+        font-size: var(--font-size-14);
+        line-height: 120%;
+        color: var(--clr-secondary);
+        max-width: 90%;
+      }
+    }
+  }
+  .actWrap {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    a {
+      color: var(--clr-primary-black);
+      text-transform: capitalize;
+    }
+    .arrowIcon {
+      background-color: var(--clr-primary);
+      @include svg-icon("../../../../public/assets/icons/arrow-right.svg", 1.6rem, 1.6rem);
+    }
+  }
+}
+.cardCont {
+  padding: var(--spacing-8) var(--spacing-16) 0;
+  .cardWrap {
+    position: relative;
+    cursor: pointer;
+    margin-bottom: var(--spacing-16);
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+  .journeyCard {
+    label {
+      border-radius: 0.4rem;
+      border: 1px solid var(--clr-stroke-grey);
+      padding: var(--spacing-16);
+      padding-left: var(--spacing-12);
+      display: flex;
+      align-items: center;
+      column-gap: var(--spacing-8);
+      cursor: pointer;
+    }
+    .userIcon {
+      align-self: flex-start;
+      width: 2.4rem !important;
+      height: 2.4rem !important;
+    }
+    input[type="radio"] {
+      -webkit-appearance: none;
+      appearance: none;
+      @include svg-icon("../../../../../public/assets/icons/radio-border.svg", 1.6rem, 1.6rem);
+      background-color: var(--clr-secondary);
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: var(--spacing-16);
+      flex: none;
+      &:checked {
+        @include svg-icon("../../../../../public/assets/icons/radio-filled.svg", 1.6rem, 1.6rem);
+        background-color: var(--clr-primary);
+        & + label {
+          border-color: var(--clr-primary);
+        }
+      }
+      &:disabled {
+        @include svg-icon("../../../../../public/assets/icons/radio-disabled.svg", 1.6rem, 1.6rem);
+        background-color: var(--clr-action-disabled);
+        + label {
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+}

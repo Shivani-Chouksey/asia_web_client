@@ -1,0 +1,32 @@
+@import "../../styles/sass/config/mixin";
+
+.modIconLink {
+  width: 100%;
+  text-align: left;
+}
+// .messageBox {
+//   display: block;
+//   width: 32.8rem;
+//   height: 16.8rem;
+//   margin: var(--spacing-16) auto 0;
+//   border: 1px solid var(--clr-stroke-grey);
+//   background-color: var(--clr-surface-grey);
+//   border-radius: 0.8rem;
+// }
+
+.logoContentWrap {
+  margin: 3.6rem 3.5rem 0;
+  text-align: center;
+  .logout {
+    display: inline-flex;
+    @include svg-icon("../../../../public/assets/icons/logout.svg", 14.8rem, 14.8rem);
+    background-color: var(--clr-primary);
+  }
+  .desc {
+    font-size: var(--font-size-20);
+    line-height: 120%;
+    color: var(--clr-secondary);
+    margin-top: var(--spacing-16);
+    max-width: 90%;
+  }
+}

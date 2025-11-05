@@ -1,0 +1,168 @@
+@import "../../styles/sass/config/mixin";
+
+.section {
+  padding: var(--spacing-12) var(--spacing-16);
+  margin-bottom: var(--spacing-12);
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  .sectionTitle {
+    color: var(--clr-primary);
+    font-family: var(--font-2);
+    font-size: var(--font-size-20);
+    line-height: 110%;
+    padding-bottom: var(--spacing-12);
+    border-bottom: 1px solid var(--clr-stroke-grey);
+    margin-bottom: var(--spacing-12);
+    font-weight: var(--font-bold);
+  }
+}
+.notificationWrapper {
+  .list {
+    .item {
+      margin-bottom: var(--spacing-12);
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+  .item {
+    padding: var(--spacing-8) 0;
+    .notificationTitle {
+      font-size: var(--font-size-16);
+      font-weight: var(--font-semibold);
+      color: var(--clr-primary-black);
+      line-height: 100%;
+      margin-bottom: var(--spacing-10);
+    }
+    .notificationDesc {
+      font-size: var(--font-size-14);
+      line-height: 120%;
+      color: var(--clr-secondary);
+      margin-bottom: var(--spacing-16);
+    }
+    .footWrap {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .time {
+        font-size: var(--font-size-12);
+        line-height: 100%;
+        color: var(--clr-grey-1);
+      }
+      a {
+        align-items: flex-end;
+        font-size: var(--font-size-12);
+        span {
+          line-height: 110%;
+        }
+        .iconNext {
+          @include svg-icon("../../../../public/assets/icons/link-right.svg", 1.6rem, 1.6rem);
+          background-color: var(--clr-primary);
+        }
+      }
+    }
+    .bidCard,
+    .requestCard {
+      padding: var(--spacing-12);
+      background-color: var(--clr-surface-grey);
+      border: 0.8px solid var(--clr-stroke-grey);
+      margin-bottom: var(--spacing-16);
+      border-radius: 0.4rem;
+      .headWrap {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-bottom: var(--spacing-8);
+        border-bottom: 0.5px solid var(--clr-stroke-grey);
+        strong {
+          font-weight: var(--font-regular);
+          font-size: var(--font-size-14);
+          line-height: 100%;
+          color: var(--clr-secondary);
+        }
+        .tag {
+          background-color: var(--clr-surface-blue);
+          border: 1px solid var(--clr-stroke-grey);
+          padding: var(--spacing-2) var(--spacing-8) 0;
+          color: var(--clr-primary);
+          font-size: var(--font-size-10);
+          border-radius: 0.2rem;
+          height: 2rem;
+        }
+      }
+      .labelValueWrap {
+        padding-top: var(--spacing-12);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        .label {
+          display: block;
+          font-size: var(--font-size-12);
+          margin-bottom: var(--spacing-8);
+          color: var(--clr-secondary);
+          line-height: 100%;
+        }
+        .value {
+          display: block;
+          font-size: var(--font-size-16);
+          color: var(--clr-primary-black);
+          line-height: 100%;
+          font-weight: var(--font-semibold);
+        }
+        .labelValue {
+          &:nth-of-type(2) {
+            .label,
+            .value {
+              text-align: center;
+            }
+          }
+          &:last-of-type {
+            .label,
+            .value {
+              text-align: right;
+            }
+          }
+        }
+      }
+      .cardDesc {
+        font-size: var(--font-size-14);
+        line-height: 120%;
+        padding-top: var(--spacing-12);
+        color: var(--clr-primary-black);
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+    }
+    .requestCard {
+      .headWrap {
+        strong {
+          line-height: 120%;
+        }
+      }
+    }
+    &.typNew {
+      background-color: var(--clr-surface-card-2);
+      padding: var(--spacing-16) var(--spacing-12) var(--spacing-12);
+      border-radius: 0.4rem;
+      .notificationTitle {
+        display: flex;
+        align-items: center;
+        column-gap: var(--spacing-6);
+        &:after {
+          content: "";
+          width: 0.8rem;
+          height: 0.8rem;
+          border-radius: 50%;
+          background-color: var(--clr-red);
+        }
+      }
+      .bidCard,
+      .requestCard {
+        background-color: var(--clr-white);
+      }
+    }
+  }
+}

@@ -1,0 +1,164 @@
+.headWrap {
+    margin-bottom: var(--spacing-16);
+}
+.title {
+    font-size: var(--font-size-24);
+    line-height: 110%;
+    font-weight: var(--font-semibold);
+    font-family: var(--font-2);
+    color: var(--clr-primary-black);
+    padding-top: var(--spacing-8);
+    margin-bottom: var(--spacing-12);
+}
+.subTitle {
+    font-size: var(--font-size-14);
+    line-height: 120%;
+    color: var(--clr-secondary);
+    max-width: 90%;
+}
+.footWrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: var(--spacing-16);
+    background-color: var(--clr-main-bg);
+    column-gap: var(--spacing-8);
+    box-shadow: 0px -4px 16px 0px rgba(24, 61, 61, 0.04);
+    button {
+        flex-grow: 1;
+        min-width: 16.76rem;
+        &:nth-of-type(1) {
+            max-width: 16.76rem;
+        }
+        &:last-of-type {
+            max-width: initial;
+        }
+        &:nth-of-type(2) {
+            max-width: 16.76rem;
+        }
+    }
+}
+.contWrap {
+    margin-bottom: var(--spacing-16);
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+    .card {
+        padding: var(--spacing-12);
+        background-color: var(--clr-white);
+        border-radius: var(--spacing-4);
+    }
+    .cardHead {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: var(--spacing-12);
+    }
+    .companyWrap {
+        display: flex;
+        column-gap: var(--spacing-8);
+        max-width: 60%;
+    }
+    .companyLogo {
+        width: 3.6rem;
+        height: 3.6rem;
+        flex-shrink: 0;
+        align-self: center;
+    }
+    .companyIntro {
+        display: flex;
+        gap: var(--spacing-8);
+        align-items: flex-start;
+        flex-direction: column;
+        .companyName {
+            font-size: var(--font-size-24);
+            line-height: 110%;
+            display: block;
+            color: var(--clr-primary);
+            font-weight: var(--font-semibold);
+            font-family: var(--font-2);
+        }
+        .tag {
+            padding: var(--spacing-6) var(--spacing-10) var(--spacing-4);
+            border-radius: 0.2rem;
+            border: 0.2px solid var(--clr-stroke-grey);
+            font-size: var(--font-size-10);
+            line-height: 110%;
+            font-weight: var(--font-medium);
+            color: var(--clr-primary);
+            background: linear-gradient(90deg, #e5f2e4 0%, #e5f2e4 0.01%, #eaf3e6 32.72%, #f9f7ed 100%);
+            flex-shrink: 0;
+            height: 2rem;
+        }
+    }
+    .cardTag {
+        font-size: var(--font-size-10);
+        line-height: 120%;
+        color: var(--clr-red-light);
+        border: 0.5px solid var(--clr-red-light);
+        border-radius: var(--spacing-2);
+        padding: 0.5rem var(--spacing-8) var(--spacing-2) var(--spacing-16);
+        text-transform: uppercase;
+        height: max-content;
+        position: relative;
+        &::before {
+            content: "";
+            position: absolute;
+            width: 0.4rem;
+            height: 0.4rem;
+            border-radius: 50%;
+            background-color: var(--clr-red-light);
+            left: var(--spacing-8);
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+    .cardFoot {
+        border: 1px solid var(--clr-stroke-grey);
+        border-radius: var(--spacing-4);
+        padding: var(--spacing-12);
+    }
+    .desc {
+        font-size: var(--font-size-14);
+        line-height: 150%;
+        color: var(--clr-secondary);
+    }
+}
+
+.rejectDrawer {
+    padding-top: var(--spacing-36);
+    max-width: 80%;
+    margin: 0 auto;
+    .rejectWrap {
+        text-align: center;
+    }
+    .remove {
+        display: block;
+        background: url("../../../public/assets/icons/message-remove.svg") no-repeat center / contain;
+        width: 14.8rem;
+        height: 14.8rem;
+        margin: 0 auto;
+    }
+    .content {
+        font-size: var(--font-size-20);
+        line-height: 120%;
+        color: var(--clr-secondary);
+        margin-top: var(--spacing-16);
+    }
+}
+
+.contentWrap {
+    padding: var(--spacing-16);
+    border-top: 1px solid var(--clr-stroke-disabled);
+    .desc {
+        font-size: var(--font-size-14);
+        line-height: 150%;
+        color: var(--clr-secondary);
+    }
+}

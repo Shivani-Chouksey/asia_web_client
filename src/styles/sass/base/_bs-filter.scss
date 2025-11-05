@@ -1,0 +1,107 @@
+// bs-filter.scss
+
+.bs-filter {
+  display: flex;
+  column-gap: 0.4rem;
+  height: 100%;
+  .left-wrap {
+    border-right: 0.5px solid var(--clr-stroke-grey);
+    background-color: var(--clr-surface-grey);
+    width: 35%;
+    flex-shrink: 0;
+    position: relative;
+  }
+  .right-wrap {
+    flex-grow: 1;
+  }
+  .filter-item {
+    display: flex;
+    align-items: center;
+    padding: var(--spacing-8) var(--spacing-16) var(--spacing-8) 0;
+    column-gap: var(--spacing-6);
+    justify-content: space-between;
+    position: relative;
+    &::after {
+      content: "";
+      position: absolute;
+      border-bottom: 0.2px solid var(--clr-stroke-grey);
+      bottom: 0;
+      right: 0;
+      left: var(--spacing-8);
+    }
+    .count {
+      font-size: var(--font-size-14);
+      color: var(--clr-secondary);
+      line-height: 120%;
+      padding-top: var(--spacing-4);
+    }
+    .radio-group {
+      display: flex;
+      align-items: center;
+      padding: var(--spacing-6) var(--spacing-16) var(--spacing-6) var(--spacing-6);
+      column-gap: var(--spacing-6);
+      justify-content: space-between;
+      position: relative;
+      width: 100%;
+      label {
+        width: inherit;
+        font-family: var(--font-1);
+        color: var(--clr-secondary);
+        font-size: var(--font-size-14);
+        line-height: 100%;
+        padding-top: var(--spacing-4);
+      }
+      input[type="radio"] {
+        -webkit-appearance: none;
+        appearance: none;
+        @include svg-icon("../../../../public/assets/icons/radio-border.svg", 2.4rem, 2.4rem);
+        background-color: var(--clr-secondary);
+        flex: none;
+        &:checked {
+          @include svg-icon("../../../../public/assets/icons/radio-filled.svg", 2.4rem, 2.4rem);
+          background-color: var(--clr-primary);
+          & + label {
+            border-color: var(--clr-primary);
+          }
+        }
+        &:disabled {
+          @include svg-icon("../../../../public/assets/icons/radio-disabled.svg", 2.4rem, 2.4rem);
+          background-color: var(--clr-action-disabled);
+          + label {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+  .MuiTabs-root {
+    border: none;
+    overflow: initial;
+    .MuiTabs-indicator {
+      width: 1px;
+      background-color: var(--clr-white);
+      right: -1px;
+    }
+    .MuiTabs-scroller {
+      position: static;
+      overflow-x: initial;
+    }
+    .MuiButtonBase-root {
+      padding: var(--spacing-16) var(--spacing-8) var(--spacing-16) var(--spacing-16);
+      font-size: var(--font-size-16);
+      line-height: 120%;
+      color: var(--clr-primary-black);
+      text-transform: initial;
+      font-family: var(--font-1);
+      text-align: left;
+      align-items: flex-start;
+      min-height: initial;
+      min-width: initial;
+      max-width: initial;
+      &.Mui-selected {
+        background-color: var(--clr-white);
+        font-weight: var(--font-semibold);
+      }
+    }
+  }
+}

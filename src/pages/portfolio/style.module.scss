@@ -1,0 +1,119 @@
+@import "../../styles/sass/config/mixin";
+
+.headWrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-28);
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    border-bottom: 1px solid var(--clr-stroke-grey);
+    bottom: -0.8rem;
+  }
+  button {
+    position: relative;
+    padding: var(--spacing-10) 0 var(--spacing-6) var(--spacing-12) !important;
+    font-size: var(--font-size-12);
+    &::before {
+      content: "";
+      position: absolute;
+      border-left: 1px solid var(--clr-stroke-disabled);
+      top: 0;
+      left: 0;
+      height: 100%;
+    }
+  }
+}
+.portfolioList {
+  .item {
+    margin-bottom: var(--spacing-16);
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.clientDrawer {
+  padding: var(--spacing-8) var(--spacing-16) 0;
+  .selectionWrap {
+    padding: var(--spacing-16) 0 0;
+  }
+  .clientList {
+    .clientItem {
+      display: flex;
+      flex-direction: row-reverse;
+      position: relative;
+      label {
+        display: flex;
+        width: 100%;
+        padding: var(--spacing-12);
+        column-gap: var(--spacing-12);
+        border-radius: var(--spacing-4);
+        border: 1px solid transparent;
+        justify-content: space-between;
+        align-items: center;
+        transition: all 0.3s ease-in-out;
+        cursor: pointer;
+      }
+
+      input[type="radio"] {
+        -webkit-appearance: none;
+        appearance: none;
+        @include svg-icon("../../../public/assets/icons/radio-border.svg", 2.4rem, 2.4rem);
+        background-color: var(--clr-secondary);
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        right: var(--spacing-12);
+        transition: all 0.3s ease-in-out;
+        flex: none;
+        &:checked {
+          @include svg-icon("../../../public/assets/icons/radio-filled.svg", 2.4rem, 2.4rem);
+          background-color: var(--clr-primary);
+          + label {
+            border: 1px solid var(--clr-primary);
+          }
+        }
+        &:disabled {
+          @include svg-icon("../../../public/assets/icons/radio-disabled.svg", 2.4rem, 2.4rem);
+          background-color: var(--clr-action-disabled);
+          + label {
+            cursor: not-allowed;
+            border: none;
+            .client {
+              color: var(--clr-grey-2) !important;
+            }
+          }
+        }
+      }
+      .client {
+        color: var(--clr-secondary);
+        font-size: var(--font-size-14);
+        line-height: 120%;
+        font-weight: var(--font-semibold);
+        flex-grow: 1;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .portfolioList {
+    display: flex;
+    row-gap: var(--spacing-16);
+    flex-wrap: wrap;
+    // column-gap: var(--spacing-32);
+    .item {
+      width: 50%;
+      &:nth-of-type(odd) {
+        padding-right: var(--spacing-16);
+      }
+      &:nth-of-type(even) {
+        padding-left: var(--spacing-16);
+      }
+    }
+  }
+}

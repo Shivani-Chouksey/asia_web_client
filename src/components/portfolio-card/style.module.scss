@@ -1,0 +1,20 @@
+.labelValueWrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin-left: auto;
+  margin-right: 0;
+  max-width: max-content;
+  row-gap: var(--spacing-10);
+  padding-top: var(--spacing-6);
+}
+.label {
+  font-size: var(--font-size-14);
+  color: var(--clr-secondary);
+}
+.value {
+  font-size: var(--font-size-20);
+  font-weight: var(--font-semibold);
+  color: var(--clr-primary-black);
+  margin-left: auto;
+}

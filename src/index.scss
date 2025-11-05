@@ -1,0 +1,50 @@
+/*
+  @Author : DigitalSalt
+  @Project : Asia Impact
+  @Date : 27/12/2023
+*/
+
+/* config */
+@import "./styles/sass/config/mixin";
+@import "./styles/sass/config/typography";
+@import "./styles/sass/config/spacing";
+@import "./styles/sass/config/colors";
+
+/* elements */
+@import "./styles/sass/elements/reset";
+@import "./styles/sass/elements/normalize";
+@import "./styles/sass/elements/elements";
+
+/* common */
+@import "./styles/sass/common/common";
+@import "./styles/sass/common/btn";
+
+/* base */
+
+@import "./styles/sass/base/bs-header";
+@import "./styles/sass/base/bs-navbar";
+@import "./styles/sass/base/bs-section";
+@import "./styles/sass/base/bs-portfolio-card";
+@import "./styles/sass/base/bs-highlight-card";
+@import "./styles/sass/base/bs-swiper";
+@import "./styles/sass/base/bs-accordion";
+@import "./styles/sass/base/bs-filter";
+@import "./styles/sass/base/bs-checkbox";
+@import "./styles/sass/base/bs-form";
+@import "./styles/sass/base/bs-radio-group";
+@import "./styles/sass/base/bs-datepicker";
+@import "./styles/sass/base/bs-upload";
+@import "./styles/sass/base/bs-select";
+@import "./styles/sass/base/bs-confirmation";
+@import "./styles/sass/base/bs-tabs";
+@import "./styles/sass/base/bs-icon-link-list";
+@import "./styles/sass/base/bs-drawer";
+@import "./styles/sass/base/bs-profile-card";
+
+/* module */
+
+// module file goes here
+
+/* layout */
+
+@import "./styles/sass/layout/lyt-main";

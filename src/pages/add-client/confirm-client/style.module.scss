@@ -1,0 +1,31 @@
+.section {
+    margin-bottom: var(--spacing-24);
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+    .sectionHead {
+        margin-bottom: var(--spacing-24);
+    }
+    .pgTitle {
+        font-size: var(--font-size-36);
+        line-height: 110%;
+        margin-bottom: var(--spacing-16);
+        font-weight: var(--font-semibold);
+        color: var(--clr-primary);
+        font-family: var(--font-2);
+    }
+    .description {
+        font-size: var(--font-size-14);
+        line-height: 120%;
+        color: var(--clr-secondary);
+        margin-bottom: var(--spacing-16);
+    }
+}
+.cardHeader {
+    .cardTitle {
+        font-size: var(--font-size-20);
+        font-weight: var(--font-bold);
+        color: var(--clr-primary);
+        font-family: var(--font-2);
+    }
+}

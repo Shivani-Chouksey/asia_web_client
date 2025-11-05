@@ -1,0 +1,27 @@
+.listWrap {
+  padding: 5rem 1.6rem;
+  ul {
+    padding-left: 1.5rem;
+  }
+  li {
+    margin-bottom: 1.5rem;
+    position: relative;
+    &:before {
+      content: "";
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background-color: var(--clr-primary-black);
+      top: 50%;
+      transform: translateY(-50%);
+      left: -0.8rem;
+      position: absolute;
+    }
+    a {
+      font-size: 1.6rem;
+      color: var(--clr-primary);
+      text-decoration: underline;
+      padding: 1rem 0;
+    }
+  }
+}

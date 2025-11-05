@@ -1,0 +1,45 @@
+@import "../../styles/sass/config/mixin";
+
+.cardWrap {
+    .cardHeader {
+        display: flex;
+        column-gap: var(--spacing-8);
+        .icon {
+            display: flex;
+            i {
+                display: inline-block;
+                @include svg-icon("../../../../public/assets/icons/tick-circle-unchecked.svg", 2.4rem, 2.4rem);
+                background-color: var(--clr-grey-1);
+            }
+        }
+    }
+    &.dataFilled {
+        .cardHeader {
+            .icon {
+                align-items: center;
+                i {
+                    display: inline-block;
+                    @include svg-icon("../../../../public/assets/icons/tick-circle-checked.svg", 2.4rem, 2.4rem);
+                    background-color: var(--clr-green-1);
+                }
+            }
+            .cardTitle {
+                padding-top: 0;
+            }
+        }
+    }
+    .cardTitle {
+        font-size: var(--font-size-14);
+        color: var(--clr-secondary);
+        padding-left: var(--spacing-8);
+        border-left: 1px solid var(--clr-stroke-grey);
+        padding-top: var(--spacing-6);
+        strong {
+            display: block;
+            margin-top: var(--spacing-8);
+            font-size: var(--font-size-16);
+            color: var(--clr-primary-black);
+            font-weight: var(--font-regular);
+        }
+    }
+}

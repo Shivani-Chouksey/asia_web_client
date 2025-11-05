@@ -1,0 +1,68 @@
+@import "../../../styles/sass/config/mixin";
+
+.uploadCont {
+    padding: 0 var(--spacing-16);
+    .head {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: var(--spacing-16);
+    }
+    .title {
+        font-size: var(--font-size-14);
+        line-height: 120%;
+        color: var(--clr-secondary);
+    }
+    .optional {
+        font-size: var(--font-size-12);
+        line-height: 120%;
+        color: var(--clr-grey-1);
+    }
+}
+.menuCont {
+    position: absolute;
+    top: 4rem;
+    right: 1.9rem;
+    border-radius: var(--spacing-4);
+    border: 0.5px solid var(--clr-stroke-grey);
+    background-color: var(--clr-white);
+    box-shadow: 4px 8px 20px 0px rgba(0, 0, 0, 0.06);
+    z-index: 2;
+    display: none;
+    &.show {
+        display: block;
+    }
+    .item {
+        font-size: var(--font-size-14);
+        line-height: 120%;
+        color: var(--clr-secondary);
+        border-bottom: 0.5px solid var(--clr-stroke-disabled);
+        &:last-of-type {
+            border-bottom: none;
+        }
+        button {
+            padding: var(--spacing-12) var(--spacing-8);
+        }
+    }
+}
+
+.rejectDrawer {
+    padding-top: var(--spacing-36);
+    max-width: 80%;
+    margin: 0 auto;
+    .rejectWrap {
+        text-align: center;
+    }
+    .remove {
+        display: block;
+        background: url("../../../../public/assets/icons/message-remove.svg") no-repeat center / contain;
+        width: 14.8rem;
+        height: 14.8rem;
+        margin: 0 auto;
+    }
+    .content {
+        font-size: var(--font-size-20);
+        line-height: 120%;
+        color: var(--clr-secondary);
+        margin-top: var(--spacing-16);
+    }
+}

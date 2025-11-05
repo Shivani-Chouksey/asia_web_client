@@ -1,0 +1,100 @@
+// bs-accordion.scss
+
+.bs-accordion {
+  &.MuiAccordion-root {
+    border: none;
+    background-color: transparent;
+    border-radius: 0px !important;
+    box-shadow: none;
+    .MuiAccordionSummary-root {
+      padding: 0;
+      min-height: initial;
+      position: relative;
+      &:before {
+        content: "";
+        @include svg-icon("../../../../public/assets/icons/arrow-down.svg", 2.4rem, 2.4rem);
+        background-color: var(--clr-primary);
+        position: absolute;
+        right: 0;
+        top: 0;
+        transform: rotateZ(0);
+      }
+    }
+    .MuiAccordionSummary-content {
+      margin: 0;
+    }
+    .MuiAccordionDetails-root {
+      padding: 0;
+      padding-top: 1.2rem;
+    }
+    &.Mui-expanded {
+      .MuiAccordionSummary-root {
+        &:before {
+          transform: rotateZ(180deg);
+        }
+      }
+    }
+    &.Mui-disabled {
+      background-color: transparent;
+      .MuiAccordionSummary-root {
+        opacity: 1;
+        &:before {
+          content: none;
+        }
+      }
+    }
+  }
+  &.typ-2 {
+    &.MuiAccordion-root {
+      padding: var(--spacing-12);
+      border: 1px solid var(--clr-stroke-grey);
+      border-radius: 0.4rem !important;
+      &.Mui-expanded {
+        border-color: var(--clr-primary);
+        .MuiAccordionSummary-root {
+          &:before {
+            transform: translateY(-50%) rotateZ(180deg);
+          }
+        }
+      }
+      .MuiAccordionSummary-root {
+        &:before {
+          width: 1.6rem;
+          height: 1.6rem;
+          transform: translateY(-50%) rotateZ(0);
+          top: 50%;
+        }
+      }
+      .MuiAccordionDetails-root {
+        padding-top: var(--spacing-20);
+      }
+    }
+  }
+  &.typ-card {
+    &.MuiAccordion-root {
+      border: 1px solid var(--clr-stroke-grey);
+      border-radius: 0.4rem !important;
+      &.Mui-expanded {
+        .MuiAccordionSummary-root {
+          &:before {
+            transform: translateY(-50%) rotateZ(180deg);
+          }
+        }
+      }
+      .MuiAccordionSummary-root {
+        padding: var(--spacing-12);
+        background-color: #e3ead7;
+        &:before {
+          width: 1.6rem;
+          height: 1.6rem;
+          top: 50%;
+          transform: translateY(-50%);
+          right: 2rem;
+        }
+      }
+      .MuiAccordionDetails-root {
+        padding-top: 0;
+      }
+    }
+  }
+}

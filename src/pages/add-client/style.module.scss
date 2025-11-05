@@ -1,0 +1,69 @@
+@import "../../styles/sass/config/mixin";
+
+.title {
+    margin-bottom: var(--spacing-16);
+}
+.subtitle {
+    margin-bottom: var(--spacing-32);
+    font-size: var(--font-size-14);
+    line-height: 120%;
+    color: var(--clr-secondary);
+}
+.contWrap {
+    .cardItem {
+        margin-bottom: var(--spacing-12);
+        &:last-of-type {
+            margin-bottom: var(--spacing-8);
+        }
+    }
+    .addBtn {
+        padding: var(--spacing-8) 0;
+    }
+    button[type="button"] {
+        color: var(--clr-primary);
+        .addIcon {
+            @include svg-icon("../../../public/assets/icons/add-filled.svg", 1.6rem, 1.6rem);
+            background-color: var(--clr-primary);
+        }
+        &:disabled {
+            color: var(--clr-grey-2);
+            .addIcon {
+                @include svg-icon("../../../public/assets/icons/add.svg", 1.6rem, 1.6rem);
+                background-color: var(--clr-grey-2);
+            }
+        }
+    }
+    i {
+        display: inline-flex;
+        vertical-align: sub;
+        margin-right: var(--spacing-4);
+    }
+}
+.footWrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--spacing-16);
+    background-color: var(--clr-main-bg);
+    column-gap: var(--spacing-8);
+    box-shadow: 0px -4px 16px 0px rgba(24, 61, 61, 0.04);
+    button {
+        flex-grow: 1;
+        min-width: 16rem;
+        &:nth-of-type(1) {
+            max-width: 16rem;
+        }
+        &:last-of-type {
+            max-width: initial;
+        }
+        &:nth-of-type(2) {
+            max-width: 16rem;
+        }
+    }
+}

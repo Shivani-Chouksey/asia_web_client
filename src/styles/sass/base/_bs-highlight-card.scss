@@ -1,0 +1,117 @@
+// bs-highlight-card.scss
+
+.bs-highlight-card {
+    background-color: var(--clr-white);
+    border: 0.2px solid var(--clr-stroke-grey);
+    border-radius: 0.8rem;
+    box-shadow: 2px 2px 5px 0px rgba(38, 50, 24, 0.15);
+    min-width: 30.8rem;
+    width: 100%;
+    position: relative;
+    a {
+        display: block;
+        padding: var(--spacing-8);
+    }
+    .card-wrap {
+        display: flex;
+        column-gap: var(--spacing-8);
+    }
+    .logo-wrap {
+        max-width: 10rem;
+        width: 100%;
+        // height: 26.655vw;
+        height: 10rem;
+    }
+    .info-wrap {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        row-gap: var(--spacing-12);
+        justify-content: space-between;
+        // padding: var(--spacing-6) 0;
+    }
+    .info-head {
+        padding-right: var(--spacing-24);
+    }
+    .fav-btn {
+        position: absolute;
+        right: var(--spacing-8);
+        top: var(--spacing-8);
+        padding: var(--spacing-4);
+        z-index: 1;
+        i {
+            display: block;
+        }
+        .favorite {
+            @include svg-icon("../../../../public/assets/icons/star.svg", 1.6rem, 1.6rem);
+            background-color: var(--clr-grey-2);
+        }
+        .favorite-filled {
+            @include svg-icon("../../../../public/assets/icons/star-filled.svg", 1.6rem, 1.6rem);
+            background-color: var(--clr-grey-3);
+        }
+    }
+    .icon-wrap {
+        display: flex;
+        padding: var(--spacing-4);
+        height: max-content;
+    }
+    .title {
+        font-size: var(--font-size-14);
+        line-height: 120%;
+        font-weight: var(--font-semibold);
+        color: var(--clr-primary);
+        margin-bottom: var(--spacing-8);
+    }
+    .card-tag,
+    .timeline-item {
+        font-size: var(--font-size-12);
+        line-height: 120%;
+        color: var(--clr-secondary);
+        display: flex;
+        column-gap: var(--spacing-2);
+    }
+    .card-tag {
+        column-gap: var(--spacing-4);
+        max-width: max-content;
+        width: 100%;
+        padding: var(--spacing-6) var(--spacing-4) var(--spacing-2);
+        background: rgba(193, 200, 176, 0.44);
+        border-radius: 0.2rem;
+    }
+    .info-wrap {
+        i {
+            width: 1.2rem;
+            height: 1.2rem;
+        }
+    }
+    .Online,
+    .online {
+        background: url("../../../../public/assets/icons/online.svg") no-repeat center / contain;
+    }
+    .Offline,
+    .offline {
+        background: url("../../../../public/assets/icons/location-transparent.svg") no-repeat center / contain;
+    }
+    .Read,
+    .read {
+        background: url("../../../../public/assets/icons/book.svg") no-repeat center / contain;
+    }
+    .Research,
+    .research {
+        @include svg-icon("../../../../public/assets/icons/research.svg", 1.2rem, 1.2rem);
+        background-color: #0f2b23;
+    }
+    .Important,
+    .important {
+        background: url("../../../../public/assets/icons/important.svg") no-repeat center / contain;
+    }
+    .date,
+    .Date {
+        background: url("../../../../public/assets/icons/calendar-filled.svg") no-repeat center / contain;
+    }
+    .time,
+    .Time {
+        background: url("../../../../public/assets/icons/clock.svg") no-repeat center / contain;
+    }
+}

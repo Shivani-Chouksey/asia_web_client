@@ -1,0 +1,87 @@
+@import "../../styles/sass/config/mixin";
+
+.cardWrap {
+  height: 15.6rem;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 2px 2px 4px 0px #e5ebda;
+  background-color: var(--clr-light-green);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  a {
+    display: flex;
+    flex-direction: column;
+    padding: var(--spacing-12);
+    height: 100%;
+    justify-content: space-between;
+    position: relative;
+    &:before {
+      content: "";
+      opacity: 0.04;
+      @include svg-icon("../../../public/assets/icons/doc-icon.svg", 7.2rem, 7.2rem);
+      background-color: var(--clr-primary-black);
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+  .cardTitle {
+    font-family: var(--font-2);
+    font-size: var(--font-size-20);
+    line-height: 100%;
+    font-weight: var(--font-bold);
+    margin-bottom: var(--spacing-4);
+    color: var(--clr-primary);
+    max-width: 10rem;
+    height: 4.4rem;
+  }
+  .date {
+    font-size: var(--font-size-12);
+    line-height: 80%;
+    display: block;
+    margin-bottom: var(--spacing-6);
+    color: var(--clr-grey-1);
+  }
+  .reportType {
+    font-size: var(--font-size-14);
+    line-height: 110%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--clr-primary);
+  }
+  .cmIcon {
+    &.arrowRight {
+      @include svg-icon("../../../public/assets/icons/arrow-right.svg", 1.2rem, 1.2rem);
+      background-color: var(--clr-secondary-2);
+    }
+  }
+  &.typBig {
+    height: 50vw;
+    box-shadow: 2px 2px 4px 0px rgba(229, 235, 218, 0.2);
+    .cardTitle {
+      line-height: 105%;
+      margin-bottom: var(--spacing-10);
+      height: initial;
+      max-width: 9.5rem;
+    }
+    .date {
+      font-size: var(--font-size-14);
+      margin-bottom: var(--spacing-8);
+    }
+    .reportType {
+      font-size: var(--font-size-16);
+    }
+    @media only screen and (min-width: 580px) {
+      height: 35vw;
+    }
+    @media only screen and (min-width: 768px) {
+      height: 30vw;
+    }
+    @media only screen and (min-width: 980px) {
+      height: 22vw;
+    }
+    @media only screen and (min-width: 1280px) {
+      height: 18vw;
+    }
+  }
+}

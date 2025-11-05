@@ -1,0 +1,25 @@
+.opportunitiesList {
+  .item {
+    margin-bottom: var(--spacing-16);
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .opportunitiesList {
+    display: flex;
+    row-gap: var(--spacing-16);
+    flex-wrap: wrap;
+    .item {
+      width: 50%;
+      &:nth-of-type(odd) {
+        padding-right: var(--spacing-16);
+      }
+      &:nth-of-type(even) {
+        padding-left: var(--spacing-16);
+      }
+    }
+  }
+}

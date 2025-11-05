@@ -1,0 +1,29 @@
+// bs-radio-group.scss
+
+.bs-radio-group {
+  .MuiFormGroup-root {
+    row-gap: var(--spacing-8);
+  }
+  .MuiFormControlLabel-root {
+    margin: 0;
+    column-gap: var(--spacing-6);
+  }
+  .MuiIcon-root {
+    width: 1.6rem;
+    height: 1.6rem;
+    @media only screen and (min-width: 1280px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .MuiRadio-root {
+    padding: var(--spacing-4);
+  }
+  .MuiFormControlLabel-label {
+    font-size: var(--font-size-14);
+    line-height: 100%;
+    color: var(--clr-primary-black);
+    font-family: var(--font-1);
+    padding-top: var(--spacing-4);
+  }
+}

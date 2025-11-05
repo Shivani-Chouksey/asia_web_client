@@ -1,0 +1,16 @@
+.section {
+    margin-bottom: var(--spacing-24);
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+    .sectionHead {
+        padding: var(--spacing-12) 0 var(--spacing-20);
+        margin-bottom: var(--spacing-24);
+    }
+    .pgTitle {
+        font-size: var(--font-size-36);
+        line-height: 100%;
+        color: var(--clr-primary-black);
+        font-family: var(--font-2);
+    }
+}

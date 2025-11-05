@@ -1,0 +1,114 @@
+// bs-tabs
+
+.bs-tabs {
+  &.typ-list {
+    .MuiTabs-root {
+      background-color: var(--clr-white);
+      border-top-left-radius: 1.2rem;
+      border-top-right-radius: 1.2rem;
+      padding: var(--spacing-8) var(--spacing-8) 0;
+      z-index: 1;
+    }
+    .MuiTabs-flexContainer {
+      justify-content: space-between;
+      column-gap: var(--spacing-8);
+    }
+    .MuiButtonBase-root {
+      padding: var(--spacing-12) var(--spacing-12) var(--spacing-20);
+      font-size: var(--font-size-14);
+      line-height: 100%;
+      min-height: initial;
+      color: var(--clr-secondary);
+      width: calc((100% - 1.6rem) / 3);
+      font-family: var(--font-1);
+      font-weight: var(--font-regular);
+      flex-direction: row;
+      column-gap: var(--spacing-6);
+      align-items: flex-end;
+      .count {
+        min-width: 1.6rem;
+        height: 1.7rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: var(--font-size-14);
+        margin-bottom: 0.1rem;
+        padding-top: 0.3rem;
+        color: var(--clr-white);
+        background-color: var(--clr-primary);
+        border-radius: 0.4rem;
+      }
+      &.Mui-selected {
+        color: var(--clr-primary);
+        font-weight: var(--font-semibold);
+      }
+    }
+    .MuiTabs-indicator {
+      height: 0.4rem;
+      background-color: var(--clr-primary);
+    }
+    &.count-2 {
+      .MuiButtonBase-root {
+        width: calc((100% - 1.6rem) / 2);
+        padding: var(--spacing-12) 0 var(--spacing-20);
+      }
+    }
+    &.typ-chat {
+      position: relative;
+      &::before {
+        content: "";
+        position: absolute;
+        width: 8.8rem;
+        height: var(--spacing-4);
+        background-color: var(--clr-stroke-disabled);
+        border-radius: var(--spacing-12);
+        left: 50%;
+        transform: translateX(-50%);
+        top: var(--spacing-4);
+      }
+      .MuiTabs-root {
+        padding-top: var(--spacing-20);
+      }
+      .MuiButtonBase-root {
+        width: calc((100% - 1.6rem) / 2);
+        padding: 0.7rem 0 1.1rem;
+        line-height: 120%;
+      }
+    }
+  }
+  &.typ-btn {
+    .MuiTabs-root {
+      min-height: initial;
+      .MuiTabs-indicator {
+        display: none;
+      }
+    }
+    .MuiTabs-flexContainer {
+      column-gap: var(--spacing-8);
+    }
+    .MuiTab-root {
+      padding: var(--spacing-8) var(--spacing-16) var(--spacing-4);
+      min-width: 8.8rem;
+      height: 3.2rem;
+      background-color: var(--clr-white);
+      border: 1px solid var(--clr-stroke-grey);
+      border-radius: 0.4rem;
+      color: var(--clr-secondary);
+      font-size: var(--font-size-14);
+      line-height: 120%;
+      min-height: initial;
+      font-family: var(--font-1);
+      &.Mui-selected {
+        color: var(--clr-white);
+        background-color: var(--clr-primary);
+        border-color: var(--clr-primary);
+      }
+    }
+  }
+  &.typ-highlight {
+    .MuiTabs-root {
+      padding: var(--spacing-12) 0;
+      margin: var(--spacing-8) 0 var(--spacing-12);
+    }
+  }
+}

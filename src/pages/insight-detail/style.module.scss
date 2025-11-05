@@ -1,0 +1,57 @@
+.insightDetailWrap {
+  .cardType {
+    padding: var(--spacing-4) var(--spacing-8) var(--spacing-2);
+    border-radius: 0.2rem;
+    border: 0.7px solid var(--clr-primary);
+    background-color: var(--clr-white);
+    font-size: var(--font-size-10);
+    color: var(--clr-primary);
+    line-height: 110%;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-bottom: var(--spacing-16);
+  }
+  .contentWrap {
+    padding-bottom: var(--spacing-16);
+    position: relative;
+    &:after {
+      content: "";
+      position: absolute;
+      height: 1px;
+      width: 18rem;
+      background: var(--clr-primary);
+      opacity: 0.5;
+      bottom: 0;
+    }
+
+    .contHead {
+      position: relative;
+      margin-bottom: var(--spacing-30);
+      &:after {
+        content: "";
+        position: absolute;
+        height: 1px;
+        width: 18rem;
+        background: var(--clr-primary);
+        opacity: 0.5;
+        bottom: -0.8rem;
+      }
+      .date {
+        display: block;
+        font-size: var(--font-size-14);
+        line-height: 110%;
+        margin-bottom: var(--spacing-8);
+        color: var(--clr-secondary);
+      }
+      .insightTitle {
+        font-size: var(--font-size-20);
+        font-weight: var(--font-semibold);
+        color: var(--clr-primary);
+        line-height: 120%;
+      }
+    }
+  }
+}

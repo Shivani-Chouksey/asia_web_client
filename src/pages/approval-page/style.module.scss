@@ -1,0 +1,133 @@
+@import "../../styles/sass/config/mixin";
+
+.title {
+    margin-bottom: var(--spacing-16);
+}
+.subTitle {
+    font-size: var(--font-size-14);
+    line-height: 120%;
+    color: var(--clr-secondary);
+}
+
+.subWrap {
+    margin-top: var(--spacing-24);
+    .profileCont {
+        text-align: center;
+        margin-bottom: var(--spacing-16);
+    }
+    .aboutCont {
+        margin-bottom: 3.2rem;
+        .contTitle {
+            font-size: var(--font-size-14);
+            line-height: 120%;
+            color: var(--clr-secondary);
+            margin-bottom: var(--spacing-8);
+            text-transform: capitalize;
+        }
+        .contDesc {
+            font-size: var(--font-size-14);
+            line-height: 120%;
+            color: var(--clr-primary);
+        }
+    }
+}
+.subItem {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--spacing-16);
+    &:last-of-type {
+        margin-bottom: 0;
+    }
+    .textWrap {
+        font-size: var(--font-size-12);
+        line-height: 120%;
+        color: var(--clr-secondary);
+        margin-left: var(--spacing-8);
+        .text {
+            font-size: var(--font-size-14);
+            color: var(--clr-primary);
+            display: block;
+            margin-top: var(--spacing-8);
+        }
+    }
+    .sms {
+        @include svg-icon("../../../public/assets/icons/sms.svg", 2.8rem, 2.8rem);
+        background-color: var(--clr-grey-3);
+    }
+    .call {
+        @include svg-icon("../../../public/assets/icons/call.svg", 2.8rem, 2.8rem);
+        background-color: var(--clr-grey-3);
+    }
+    .map {
+        @include svg-icon("../../../public/assets/icons/map.svg", 2.8rem, 2.8rem);
+        background-color: var(--clr-grey-3);
+    }
+}
+.logoWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--clr-surface-card-2);
+    width: 8.8rem;
+    height: 8.8rem;
+    border-radius: 50%;
+    padding: 0;
+    position: relative;
+    margin: 0 auto var(--spacing-8);
+    img {
+        height: 100%;
+        object-fit: cover;
+    }
+    span {
+        font-size: var(--font-size-16);
+        font-weight: var(--font-semibold);
+        color: var(--clr-primary);
+        line-height: 120%;
+        display: block;
+        padding-top: var(--spacing-4);
+    }
+}
+.titleWrap {
+    .clientName {
+        font-size: var(--font-size-24);
+        line-height: 120%;
+        color: var(--clr-primary-black);
+        font-weight: var(--font-semibold);
+        display: block;
+        margin-bottom: var(--spacing-8);
+    }
+    .clientTag {
+        font-size: var(--font-size-16);
+        line-height: 120%;
+        color: var(--clr-secondary);
+    }
+}
+
+.footWrap {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: var(--spacing-16);
+    background-color: var(--clr-main-bg);
+    column-gap: var(--spacing-8);
+    box-shadow: 0px -4px 16px 0px rgba(24, 61, 61, 0.04);
+    button {
+        flex-grow: 1;
+        min-width: 16.76rem;
+        &:nth-of-type(1) {
+            max-width: 16.76rem;
+        }
+        &:last-of-type {
+            max-width: initial;
+        }
+        &:nth-of-type(2) {
+            max-width: 16.76rem;
+        }
+    }
+}

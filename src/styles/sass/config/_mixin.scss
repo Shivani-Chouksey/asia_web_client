@@ -1,0 +1,79 @@
+//media query
+@mixin mq-below($breakpoint) {
+  @media only screen and (max-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin mq-between($lower, $upper) {
+  @media only screen and (min-width: $lower) and (max-width: $upper) {
+    @content;
+  }
+}
+
+@mixin mq-above($breakpoint) {
+  @media only screen and (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+@mixin orientation($direction) {
+  $orientation-landscape: "(orientation:landscape)";
+  $orientation-portrait: "(orientation:portrait)";
+
+  @if $direction ==landscape {
+    @media #{$orientation-landscape} {
+      @content;
+    }
+  }
+
+  @if $direction ==portrait {
+    @media #{$orientation-portrait} {
+      @content;
+    }
+  }
+}
+
+//font styles
+@mixin font-source(
+  $size: false,
+  $lh: false,
+  $weight: false,
+  $colour: false,
+  $tt: false
+) {
+  @if $size {
+    font-size: $size;
+  }
+
+  @if $colour {
+    color: $colour;
+  }
+
+  @if $weight {
+    font-weight: $weight;
+  }
+
+  @if $lh {
+    line-height: $lh;
+  }
+
+  @if $tt {
+    text-transform: $tt;
+  }
+}
+
+@mixin svg-icon($path, $height, $width) {
+  height: $height;
+  width: $width;
+  mask-image: url($path);
+  -webkit-mask-image: url($path);
+  background-size: cover;
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-size: contain;
+  -webkit-mask-position: center;
+  mask-position: center;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+}

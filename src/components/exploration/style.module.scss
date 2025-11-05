@@ -1,0 +1,47 @@
+.logoContentWrap {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 100%;
+    transform: translate(-50%, -50%);
+    .exploreImage {
+        background: url("../../../public/assets/logos/explore-opportunities.png") no-repeat center / contain;
+        width: 14rem;
+        height: 14rem;
+        margin: 0 auto var(--spacing-32);
+    }
+    .contentWrap {
+        padding: 0 var(--spacing-18);
+    }
+    .title {
+        font-size: var(--font-size-36);
+        font-weight: var(--font-semibold);
+        line-height: 120%;
+        color: var(--clr-primary);
+        font-family: var(--font-2);
+        margin-bottom: var(--spacing-16);
+        text-align: center;
+    }
+}
+
+.footWrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: var(--spacing-8);
+    padding: var(--spacing-16);
+    button {
+        flex-grow: 1;
+        min-width: 16rem;
+        padding: var(--spacing-14);
+        &:nth-of-type(1) {
+            max-width: 16rem;
+        }
+        &:last-of-type {
+            max-width: initial;
+        }
+        &:nth-of-type(2) {
+            max-width: 16rem;
+        }
+    }
+}

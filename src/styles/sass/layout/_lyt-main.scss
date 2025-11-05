@@ -1,0 +1,149 @@
+// lyt-main.scss
+
+.lyt-main {
+  overflow-x: hidden;
+  padding: var(--spacing-8) 0 var(--spacing-12);
+  &.typ-newsdetail {
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    section {
+      &:first-of-type {
+        .bs-section {
+          padding-top: var(--spacing-8);
+          padding-bottom: 0;
+        }
+      }
+    }
+    .bs-section {
+      &.typ-news {
+        padding-left: var(--spacing-16);
+        padding-right: var(--spacing-16);
+      }
+    }
+  }
+  .cont-body {
+    p {
+      font-size: var(--spacing-14);
+      line-height: 150%;
+      color: var(--clr-secondary);
+      margin-bottom: var(--spacing-22);
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+  &.typ-login {
+    padding-top: var(--spacing-22);
+    padding-left: var(--spacing-16);
+    padding-right: var(--spacing-16);
+    height: calc(100vh - 5.6rem);
+    .form-foot {
+      border-top: 1px solid var(--clr-stroke-disabled);
+    }
+  }
+  &.typ-signup,
+  &.typ-details-form {
+    padding-left: var(--spacing-16);
+    padding-right: var(--spacing-16);
+    padding-bottom: 12.2rem;
+  }
+  &.typ-otp {
+    padding-top: 7.8rem;
+    padding-left: var(--spacing-16);
+    padding-right: var(--spacing-16);
+    .form-foot {
+      border-top: 1px solid var(--clr-stroke-disabled);
+    }
+  }
+  &.typ-notification {
+    padding-top: var(--spacing-12);
+  }
+  &.typ-report-detail {
+    padding-top: var(--spacing-12);
+  }
+  &.typ-com-detail,
+  &.typ-highlight-detail {
+    padding-bottom: 12.2rem !important;
+  }
+  &.typ-highlight-detail {
+    padding-top: 0;
+    .bs-section {
+      padding-top: 0;
+    }
+  }
+  &.typ-sticky-tabs {
+    overflow-x: initial;
+    padding-bottom: 0;
+    .bs-tabs {
+      .MuiTabs-root {
+        position: sticky;
+        top: 5.5rem;
+      }
+    }
+  }
+  &.typ-ps {
+    padding: 0;
+    .bs-form {
+      padding: var(--spacing-12) var(--spacing-16) 0;
+    }
+  }
+  &.typ-request {
+    padding: var(--spacing-32) var(--spacing-16) 0;
+  }
+  &.typ-message {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 5.6rem);
+    overflow: hidden;
+  }
+  .form-foot {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: var(--spacing-16);
+    box-shadow: 0px -4px 16px 0px rgba(24, 61, 61, 0.04);
+    background-color: var(--clr-main-bg);
+    z-index: 1;
+    button {
+      width: 100%;
+    }
+    @media only screen and (min-width: 768px) {
+      max-width: 50rem;
+      margin: 0 auto;
+    }
+  }
+  &.typ-btn-spacing {
+    padding: 0 0 12.2rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .lyt-main {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding-left: 3rem;
+    padding-right: 3rem;
+    overflow-x: initial;
+    &.typ-main {
+      max-width: 1170px;
+      padding-left: 3rem;
+      padding-right: 3rem;
+      margin: initial;
+      padding-top: 5.6rem;
+      overflow-x: initial;
+    }
+    &.typ-login,
+    &.typ-otp,
+    &.typ-signup,
+    &.typ-details-form,
+    &.typ-ps {
+      max-width: 50rem;
+      margin: 0 auto;
+      padding-left: 3rem;
+      padding-right: 3rem;
+    }
+  }
+}

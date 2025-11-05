@@ -1,0 +1,61 @@
+@import "../../styles/sass/config/mixin";
+
+.cardWrap {
+  display: flex;
+  align-items: center;
+  column-gap: var(--spacing-8);
+  justify-content: space-between;
+  padding: var(--spacing-8) var(--spacing-16);
+  background-color: var(--clr-surface-card);
+  border: 1px solid var(--clr-stroke-grey);
+  border-radius: 0.4rem;
+  strong {
+    font-size: var(--font-size-20);
+    line-height: 120%;
+    color: var(--clr-primary-black);
+    font-weight: var(--font-regular);
+  }
+  .logoWrap {
+    button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 4.8rem;
+      height: 4.8rem;
+      border-radius: 50%;
+      background-color: var(--clr-surface-card-2);
+      position: relative;
+      padding: 0;
+      &.uploaded {
+        overflow: hidden;
+      }
+      img {
+        height: 100%;
+        object-fit: cover;
+      }
+      span {
+        font-size: var(--font-size-20);
+        font-weight: var(--font-semibold);
+        color: var(--clr-primary);
+        line-height: 120%;
+        display: block;
+        padding-top: var(--spacing-4);
+      }
+      i {
+        display: inline-block;
+        position: absolute;
+        top: -0.2rem;
+        right: -0.2rem;
+        @include svg-icon(
+          "../../../../public/assets/icons/add-circle.svg",
+          1.6rem,
+          1.6rem
+        );
+        background-color: var(--clr-primary);
+      }
+    }
+  }
+}
+.uploadCont {
+  padding: var(--spacing-18) var(--spacing-16);
+}

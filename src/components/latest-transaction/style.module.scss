@@ -1,0 +1,95 @@
+.transactionCard {
+  height: 12rem;
+  background: linear-gradient(180deg, #fff 0%, #fff 152.13%);
+  border-radius: 0.4rem;
+  display: flex;
+  align-items: center;
+  .transactionWrap {
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+    max-width: calc(100% - 8.2rem);
+    overflow: hidden;
+    height: 100%;
+  }
+  .transactionBubble {
+    border-radius: 50%;
+    box-shadow: 0px 2px 3px 0px rgba(255, 255, 255, 0.15) inset;
+    // filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.08));
+    backdrop-filter: blur(3px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &.small {
+      width: 2.4rem;
+      height: 2.4rem;
+      .imgWrap {
+        width: 1.6rem;
+      }
+    }
+    &.medium {
+      width: 2.8rem;
+      height: 2.8rem;
+      .imgWrap {
+        width: 2rem;
+      }
+    }
+    &.large {
+      width: 3.2rem;
+      height: 3.2rem;
+      .imgWrap {
+        width: 2.4rem;
+      }
+    }
+  }
+  .transactionDetail {
+    text-align: center;
+    padding: var(--spacing-4);
+    border-radius: 0.4rem;
+    background-color: var(--clr-white);
+    color: var(--clr-blue);
+    font-size: var(--font-size-8);
+    line-height: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--spacing-2);
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    span {
+      display: block;
+    }
+    &:before {
+      content: "";
+      position: absolute;
+      border-right: 0.8rem solid transparent;
+      border-left: 0.8rem solid transparent;
+      border-bottom: 0.8rem solid var(--clr-white);
+      left: 50%;
+      transform: translateX(-50%);
+    }
+  }
+  .infographyWrap {
+    display: flex;
+    padding: var(--spacing-16) var(--spacing-8);
+    align-items: center;
+    width: 8.2rem;
+    flex-shrink: 0;
+    border-left: 1px solid var(--clr-stroke-disabled);
+    span {
+      width: 6.6rem;
+      height: 6.6rem;
+      background-image: url(../../../public/assets/latest-transaction-bg.png);
+      background-size: cover;
+      background-repeat: no-repeat;
+    }
+  }
+}
+
+@media only screen and (min-width: 1280px) {
+  .transactionCard {
+    height: 15rem;
+  }
+}

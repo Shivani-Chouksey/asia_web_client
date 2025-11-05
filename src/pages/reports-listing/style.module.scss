@@ -1,0 +1,14 @@
+.reportsList {
+  display: flex;
+  row-gap: var(--spacing-16);
+  flex-wrap: wrap;
+  .item {
+    width: 50%;
+    &:nth-of-type(even) {
+      padding-left: var(--spacing-6);
+    }
+    &:nth-of-type(odd) {
+      padding-right: var(--spacing-6);
+    }
+  }
+}

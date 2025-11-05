@@ -1,0 +1,47 @@
+@import "../../styles/sass/config/mixin";
+
+.headWrap {
+    margin-bottom: var(--spacing-24);
+}
+.title {
+    font-size: var(--font-size-24);
+    line-height: 110%;
+    font-weight: var(--font-semibold);
+    font-family: var(--font-2);
+    color: var(--clr-primary-black);
+    padding-top: var(--spacing-8);
+    margin-bottom: var(--spacing-12);
+}
+.subTitle {
+    font-size: var(--font-size-14);
+    line-height: 120%;
+    color: var(--clr-secondary);
+    max-width: 90%;
+}
+.countText {
+    font-size: var(--font-size-10);
+    line-height: 120%;
+    color: var(--clr-secondary);
+    text-align: right;
+    margin-bottom: var(--spacing-4);
+}
+.infoCont {
+    border: 1px solid var(--clr-stroke-grey);
+    padding: var(--spacing-12);
+    border-radius: var(--spacing-8);
+    background-color: var(--clr-surface-light);
+    margin-top: var(--spacing-16);
+    display: flex;
+    gap: var(--spacing-8);
+    .desc {
+        font-size: var(--font-size-12);
+        line-height: 150%;
+        color: var(--clr-primary-black);
+    }
+    .error {
+        display: flex;
+        flex: none;
+        @include svg-icon("../../../../public/assets/icons/info-circle.svg", 1.6rem, 1.6rem);
+        background-color: var(--clr-primary-black);
+    }
+}

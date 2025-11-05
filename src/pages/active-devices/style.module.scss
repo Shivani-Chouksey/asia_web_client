@@ -1,0 +1,116 @@
+@import "../../../src/styles/sass/config/mixin";
+
+.title {
+  margin-bottom: var(--spacing-16);
+}
+.subtitle {
+  margin-bottom: var(--spacing-32);
+  font-size: var(--font-size-14);
+  line-height: 120%;
+  color: var(--clr-secondary);
+}
+
+.section {
+  margin-bottom: var(--spacing-24);
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  .secTitle {
+    font-size: var(--font-size-20);
+    line-height: 120%;
+    color: var(--clr-secondary);
+    margin-bottom: var(--spacing-20);
+  }
+  .cardWrap {
+    margin-bottom: var(--spacing-12);
+    &:last-of-type {
+      margin-bottom: var(--spacing-32);
+    }
+  }
+  .card {
+    background-color: var(--clr-white);
+    border: 1px solid var(--clr-stroke-grey);
+    border-radius: 0.4rem;
+    .deviceWrap {
+      padding: var(--spacing-16) var(--spacing-12);
+      display: flex;
+      column-gap: var(--spacing-12);
+      align-items: baseline;
+    }
+    .deviceDetails {
+      display: flex;
+      flex-direction: column;
+      row-gap: var(--spacing-4);
+      width: 100%;
+    }
+    .infoWrap {
+      display: flex;
+      align-items: center;
+      column-gap: var(--spacing-8);
+      height: var(--spacing-24);
+    }
+    .deviceInfo {
+      display: flex;
+      min-width: 9rem;
+      column-gap: var(--spacing-2);
+      padding-right: var(--spacing-8);
+      .mobile {
+        background-color: var(--clr-primary);
+        @include svg-icon(
+          "../../../public/assets/icons/mobile-active.svg",
+          1.6rem,
+          1.6rem
+        );
+      }
+      .location {
+        background-color: var(--clr-primary);
+        @include svg-icon(
+          "../../../public/assets/icons/location.svg",
+          1.6rem,
+          1.6rem
+        );
+      }
+    }
+    .deviceTitle {
+      font-size: var(--font-size-14);
+      line-height: 120%;
+      color: var(--clr-primary-black);
+      padding-top: var(--spacing-2);
+    }
+    .deviceStatus {
+      font-size: var(--font-size-12);
+      line-height: 120%;
+      color: var(--clr-red);
+      position: relative;
+      padding: var(--spacing-6) var(--spacing-8) var(--spacing-2);
+      padding-left: var(--spacing-14);
+      &::before {
+        content: "";
+        position: absolute;
+        width: var(--spacing-6);
+        height: var(--spacing-6);
+        background-color: var(--clr-red);
+        border-radius: 50%;
+        left: 4px;
+        top: 52%;
+        transform: translateY(-50%);
+      }
+      &.active {
+        color: var(--clr-green-2);
+        &::before {
+          background-color: var(--clr-green-2);
+        }
+      }
+    }
+    .nextIcon {
+      @include svg-icon(
+        "../../../public/assets/icons/arrow-right.svg",
+        1.6rem,
+        1.6rem
+      );
+      background-color: var(--clr-primary);
+      margin-left: auto;
+      margin-right: 0;
+    }
+  }
+}

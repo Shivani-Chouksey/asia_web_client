@@ -1,0 +1,26 @@
+// bs-checkbox.scss
+
+.bs-checkbox {
+  .MuiFormControlLabel-root {
+    margin: 0;
+  }
+  .MuiIcon-root {
+    width: 2.4rem;
+    height: 2.4rem;
+  }
+  .MuiCheckbox-root {
+    padding: 0.6rem;
+    &.Mui-checked {
+      + .MuiFormControlLabel-label {
+        color: var(--clr-primary-black);
+      }
+    }
+  }
+  .MuiFormControlLabel-label {
+    font-family: var(--font-1);
+    color: var(--clr-secondary);
+    font-size: var(--font-size-14);
+    line-height: 100%;
+    padding-top: var(--spacing-4);
+  }
+}

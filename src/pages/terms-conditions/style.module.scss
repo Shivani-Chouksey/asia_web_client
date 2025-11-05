@@ -1,0 +1,11 @@
+.section {
+    padding: 0 var(--spacing-16);
+    .pgTitle {
+        font-size: var(--font-size-36);
+        font-family: var(--font-2);
+        line-height: 110%;
+        font-weight: var(--font-semiBold);
+        color: var(--clr-primary);
+        margin-bottom: var(--spacing-32);
+    }
+}

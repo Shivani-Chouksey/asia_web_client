@@ -1,0 +1,14 @@
+.uploadCont {
+  padding: var(--spacing-24) var(--spacing-16);
+  padding-top: 0;
+  .uploadTitle {
+    font-size: var(--font-size-16);
+    line-height: 120%;
+    color: var(--clr-secondary);
+    display: block;
+    margin-bottom: var(--spacing-16);
+  }
+}
+.formWrap {
+  padding: var(--spacing-12) var(--spacing-16);
+}

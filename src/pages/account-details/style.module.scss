@@ -1,0 +1,16 @@
+@import "../../styles/sass/config/mixin";
+
+.title {
+  margin-bottom: var(--spacing-24);
+}
+.arrowRight {
+  @include svg-icon("../../../../public/assets/icons/arrow-right.svg", 1.2rem, 1.2rem);
+  background-color: var(--clr-secondary-2);
+}
+.countText {
+  font-size: var(--font-size-10);
+  line-height: 120%;
+  color: var(--clr-secondary);
+  text-align: right;
+  margin-top: var(--spacing-4);
+}

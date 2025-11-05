@@ -1,0 +1,24 @@
+.section {
+  margin-bottom: var(--spacing-24);
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+  .sectionHead {
+    margin-bottom: var(--spacing-20);
+  }
+  .pgTitle {
+    font-size: var(--font-size-36);
+    line-height: 100%;
+    margin-bottom: var(--spacing-24);
+    color: var(--clr-primary-black);
+    font-family: var(--font-2);
+  }
+  .cardList {
+    .cardItem {
+      margin-bottom: var(--spacing-20);
+      &:last-of-type {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
