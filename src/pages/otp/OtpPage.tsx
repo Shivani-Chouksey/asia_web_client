@@ -3,6 +3,11 @@ import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import Button from "src/components/common/button/Button";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import API_ENDPOINTS from "src/api-endpoints";
+import axios from "axios";
+import { getSocket, initSocket } from "src/socketService";
+import SOCKET_EVENTS, { SOCKET_URL } from "src/socketEvents";
 
 export interface OtpData {
   type: string;
@@ -26,25 +31,58 @@ function OtpPage() {
       navigate("/signup/details-form");
     }
   };
-  const onConfirmClick = () => {
-    if (otp === "123456") {
-      if (location.state.source === "login") {
-        navigate("/signup");
+  const onConfirmClick = async () => {
+    try {
+      if (otp) {
+        const res: any = await axios.post(API_ENDPOINTS.verifyOtp, { email: data.value, otp: otp });
+        console.log('verifyotp response', res);
+
+        if (res.data.success) {
+          sessionStorage.setItem('access_token', res.data.data.access_token);
+          sessionStorage.setItem('user_id',res.data.data.id);   
+          sessionStorage.setItem('user_role',res.data.data.role);   
+          sessionStorage.setItem('user_email',res.data.data.email);   
+          //socket connection
+          // first init socket connection
+          await initSocket( res.data.data.access_token);
+          // socket.emit(SOCKET_EVENTS.REGISTER, { userId: res.data.data.id });
+
+          // getSocket()
+          navigate('/impact');
+
+        }
+        // if (location.state.source === "login") {
+        //   navigate("/signup");
+        // }
+        // if (location.state.source === "personal-detail") {
+        //   navigate("/signup/details-form/identity-proof");
+        // }
       }
-      if (location.state.source === "personal-detail") {
-        navigate("/signup/details-form/identity-proof");
+    } catch (error: any) {
+      console.log(error);
+      if (error.response?.status === 404) {
+        toast.error(error.response.data.message || "Invalid OTP. Please try again.");
+        navigate('/signup');
+      } else {
+        console.error("Login error:", error);
+        // Optionally show a toast or error message
       }
     }
   };
   useEffect(() => {
-    if (otp === "123456") {
+    // if (otp === "123456") {
+    //   setBtnValid(false);
+    //   setShowError(false);
+    // } else {
+    //   setBtnValid(true);
+    //   if (otp.length === 6) {
+    //     setShowError(true);
+    //   }
+    // }
+    console.log(otp);
+
+    if (otp.length === 6) {
       setBtnValid(false);
-      setShowError(false);
-    } else {
-      setBtnValid(true);
-      if (otp.length === 6) {
-        setShowError(true);
-      }
     }
   }, [otp]);
 

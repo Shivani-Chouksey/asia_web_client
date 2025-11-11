@@ -18,19 +18,21 @@ export interface CompanyChatCardData {
   interestedProfile?: ChatProfileCardData[];
 }
 
-function CompanyChatCard(props: CompanyChatCardData) {
+function CompanyChatCard(props: any) {
+  console.log("props value inside companychatcard",props);
+  
   return (
     <div className="bs-portfolio-card typ-chat">
       <div className="head-wrap">
         <div className="profile-wrap">
           <div className="profile-logo">
-            <img src={props.companyLogo} alt={props.companyName} />
+            <img src={props.companyLogo} alt={props.companyInfo?.name} />
           </div>
           <div className="profile-cont">
-            <strong className="profile-name">{props.companyName}</strong>
+            <strong className="profile-name">{props.companyInfo?.name}</strong>
             {props.cardType !== "incoming" ? (
               <div className="tag-wrap">
-                <span>{props.companyLocation}</span>
+                <span>{props.companyInfo?.location || 'India'}</span>
               </div>
             ) : (
               ""
@@ -38,7 +40,7 @@ function CompanyChatCard(props: CompanyChatCardData) {
           </div>
         </div>
         {props.cardType === "incoming" ? (
-          <span className="bid-date">{props.requestDate}</span>
+          <span className="bid-date">{props.createdAt}</span>
         ) : (
           ""
         )}
@@ -89,21 +91,25 @@ function CompanyChatCard(props: CompanyChatCardData) {
               </strong>
             </div>
           </AccordionSummary>
-          {props.interestedProfile?.length !== 0 ? (
+         <RequestCard {...props}></RequestCard>
+
+          {/* {props.interestedProfile?.length !== 0 ? (
             <AccordionDetails>
               <div className="seller-cont">
                 <ul className="list">
-                  <RequestCard></RequestCard>
+                  <RequestCard {...item}></RequestCard>
                 </ul>
               </div>
             </AccordionDetails>
           ) : (
             <></>
-          )}
+          )} */}
         </Accordion>
       </div>
     </div>
   );
 }
+
+
 
 export default CompanyChatCard;

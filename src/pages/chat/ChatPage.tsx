@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "./style.module.scss";
 import CompanyChatCard, {
   CompanyChatCardData,
@@ -6,12 +6,18 @@ import CompanyChatCard, {
 import React from "react";
 import { Tab, Tabs } from "@mui/material";
 import RequestCard from "src/components/request-card/RequestCard";
+import axios from "axios";
+import API_ENDPOINTS from "src/api-endpoints";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+
 
 function ChatPage() {
   const [value, setValue] = React.useState(0);
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
+  const navigate = useNavigate()
   const pageTabItems = [
     {
       id: "tab01",
@@ -24,7 +30,7 @@ function ChatPage() {
       isActive: false,
     },
   ];
-
+  const [companyList, setCompanyList] = useState<any>([])
   const [cards, setcards] = useState<CompanyChatCardData[]>([
     {
       companyId: "001",
@@ -87,7 +93,7 @@ function ChatPage() {
     },
     {
       companyId: "002",
-      companyName: "Vilcart",
+      companyName: "Vilcart-2",
       companyLocation: "India",
       companyLogo: `/assets/logos/vilcart-logo.png`,
       holdingCount: 500,
@@ -113,6 +119,32 @@ function ChatPage() {
       ],
     },
   ]);
+
+  const authToken = sessionStorage.getItem('access_token')
+  const getAllCompanyRequests = async () => {
+    try {
+      const res = await axios.get(API_ENDPOINTS.get_all_company_requests, {
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
+      })
+      console.log("Company requests fetcheddd:", res.data);
+      setCompanyList(res.data.data)
+    } catch (error: any) {
+      console.error("Error fetching company requests:", error);
+      if (error.response.data.statusCode === 401) {
+        toast.error(error.response.data.message);
+        navigate('/login')
+
+      } else {
+        toast.error(error.response?.data?.message || "Failed to fetch company requests.");
+      }
+
+    }
+  }
+  useEffect(() => {
+    getAllCompanyRequests();
+  }, [])
   const outgoingCard = cards.filter((obj) => {
     return obj.cardType === "outgoing";
   });
@@ -122,6 +154,9 @@ function ChatPage() {
   const pendingCard = cards.filter((obj) => {
     return obj.cardType === "pending";
   });
+  //  const outgoingReq = companyList.filter((obj:any) => {
+  //   return obj.outgoingReq
+  // });
   return (
     <div className="lyt-main typ-main">
       <section>
@@ -140,7 +175,7 @@ function ChatPage() {
                   hidden={value !== 0}
                 >
                   <div className={`${styles.bidsList}`}>
-                    {incomingCard.map((item, index) => {
+                    {companyList.outgoingReq && companyList.outgoingReq.map((item: any, index: number) => {
                       return (
                         <div key={index} className={`${styles.item}`}>
                           <CompanyChatCard {...item}></CompanyChatCard>
@@ -155,7 +190,14 @@ function ChatPage() {
                   hidden={value !== 1}
                 >
                   <div className={`${styles.bidsList}`}>
-                    {outgoingCard.map((item, index) => {
+                    {/* {outgoingCard.map((item, index) => {
+                      return (
+                        <div key={index} className={`${styles.item}`}>
+                          <CompanyChatCard {...item}></CompanyChatCard>
+                        </div>
+                      );
+                    })} */}
+                    {companyList.incomingReq && companyList.incomingReq.map((item: any, index: number) => {
                       return (
                         <div key={index} className={`${styles.item}`}>
                           <CompanyChatCard {...item}></CompanyChatCard>
@@ -170,7 +212,14 @@ function ChatPage() {
                   hidden={value !== 2}
                 >
                   <div className={`${styles.bidsList}`}>
-                    <RequestCard></RequestCard>
+                    {companyList.pendingReq && companyList.incomingReq.map((item: any, index: number) => {
+                      return (
+                        <div key={index} className={`${styles.item}`}>
+                          <RequestCard {...item}></RequestCard>
+
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               </div>

@@ -3,14 +3,20 @@ import styles from "./style.module.scss";
 import BottomSheet from "src/components/bottom-sheet/BottomSheet";
 import CheckBox from "src/components/common/checkbox/CheckBox";
 import Button from "src/components/common/button/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { getSocket } from "src/socketService";
+import SOCKET_EVENTS from "src/socketEvents";
 
 function ChatMessagePage() {
   const navigate = useNavigate();
   const [openNoteDrawer, setOpenNoteDrawer] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
   const [openRejectDrawer, setOpenRejectDrawer] = useState(false);
+  const [selectedNotification, setSelectedNotification] = useState();
+  const location = useLocation();
+  const notificationData: any = location.state;
+  console.log("notification datafrom   location", notificationData);
 
   const handleCheckboxChange = (event: any) => {
     event.target.checked
@@ -18,10 +24,32 @@ function ChatMessagePage() {
       : setIsCheckboxChecked(false);
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = async () => {
     setOpenNoteDrawer(true);
-    navigate("/chat-details");
+
+    const socket = getSocket();
+    if (!socket || !socket.connected) {
+      console.error('Socket not connected yet');
+      return;
+    } else {
+      const data = {
+        company_req_id: notificationData.data.id,
+        chat_note_accept_status: true
+      }
+       // Emit ACCEPT_CHAT to server
+      socket.emit(SOCKET_EVENTS.ACCEPT_CHAT, data);
+
+       // Listen for CHAT_STARTED response
+      socket.on(SOCKET_EVENTS.CHAT_STARTED, (data:any) => {
+        navigate('/chat-details', { state: data })
+
+      })
+    }
+
+
   };
+
+
 
   return (
     <>
@@ -39,7 +67,59 @@ function ChatMessagePage() {
                   offer.
                 </p>
               </div>
-              <div className={`${styles.contWrap}`}>
+              {notificationData && (
+                // notificationData.map((notif: any, index: number) => (
+                <>
+                  <div className={styles.contWrap}>
+                    <div className={styles.card}>
+                      <div className={styles.cardHead}>
+                        <div className={styles.companyWrap}>
+                          <span className={`${styles.companyLogo}`}>
+                            <img
+                              src="/assets/logos/banyan-nation-logo.png"
+                              alt=""
+                            />
+                          </span>
+                          <div className={styles.companyIntro}>
+                            <strong className={styles.companyName}>
+                              {notificationData.data.companyInfo?.name}
+                            </strong>
+                            <span className={styles.tag}>
+                              {notificationData.data.companyInfo?.type || 'India'}
+                            </span>
+                          </div>
+                        </div>
+                        <span className={styles.cardTag}>new</span>
+                      </div>
+                      <div className={styles.cardFoot}>
+                        <p className={styles.desc}>{notificationData.data.message}</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className={`${styles.footWrap}`}>
+                    <Button
+                      btnStyle="secondary"
+                      onClick={() => {
+                        setOpenRejectDrawer(true);
+                      }}
+                    >
+                      Reject
+                    </Button>
+                    <Button
+                      btnStyle="primary"
+                      onClick={() => {
+                        setSelectedNotification(notificationData.id)
+                        setOpenNoteDrawer(true);
+                      }}
+                    >
+                      Chat
+                    </Button>
+                  </div>
+                </>
+                // ))
+              )}
+
+              {/* <div className={`${styles.contWrap}`}>
                 <div className={`${styles.card}`}>
                   <div className={`${styles.cardHead}`}>
                     <div className={`${styles.companyWrap}`}>
@@ -51,42 +131,23 @@ function ChatMessagePage() {
                       </span>
                       <div className={`${styles.companyIntro}`}>
                         <strong className={`${styles.companyName}`}>
-                          Banyan Nation
+                          {notif.companyInfo?.name}
                         </strong>
-                        <span className={`${styles.tag}`}>India</span>
+                        <span className={`${styles.tag}`}>{notif.companyInfo?.country || 'India'}</span>
                       </div>
                     </div>
                     <span className={`${styles.cardTag}`}>new</span>
                   </div>
                   <div className={`${styles.cardFoot}`}>
                     <p className={`${styles.desc}`}>
-                      I am interested in buying 500 DRs for 5€/DR. I am highly
-                      interested in the company and want to contribute to its
-                      growth.
+                      {notif.message}
                     </p>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </section>
-          <div className={`${styles.footWrap}`}>
-            <Button
-              btnStyle="secondary"
-              onClick={() => {
-                setOpenRejectDrawer(true);
-              }}
-            >
-              Reject
-            </Button>
-            <Button
-              btnStyle="primary"
-              onClick={() => {
-                setOpenNoteDrawer(true);
-              }}
-            >
-              Chat
-            </Button>
-          </div>
+
         </div>
       </main>
       <BottomSheet

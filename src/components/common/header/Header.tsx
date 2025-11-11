@@ -277,13 +277,14 @@ function Header(props: HeaderProps) {
       );
     }
   }, [props.currentStep]);
+  const user=sessionStorage.getItem('user_email')
   return (
     <>
       <div className={`bs-header ${props.center ? "center" : ""}`}>
         {props.showProfile ? (
           <div className="profile-wrap">
             <i className="user-logo"></i>
-            <span className="intro-text">Hi, Charles</span>
+            <span className="intro-text">Hi, {user}</span>
           </div>
         ) : (
           <div className="icon-title-wrap">
@@ -303,7 +304,7 @@ function Header(props: HeaderProps) {
         )}
         {props.showChat ? (
           <button className="advisor-chat">
-            Advisor <i></i>
+            {sessionStorage.getItem('user_role')} <i></i>
           </button>
         ) : (
           <></>

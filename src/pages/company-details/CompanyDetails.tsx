@@ -1,23 +1,39 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "src/components/common/header/Header";
 import { Tab, Tabs } from "@mui/material";
 import BottomSheet from "src/components/bottom-sheet/BottomSheet";
 import CheckBox from "src/components/common/checkbox/CheckBox";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./style.module.scss";
 import BuyerSellerCard, {
   BuyerSellerCardData,
 } from "../../components/buyer-seller-card/BuyerSellerCard";
 import RequestCard from "src/components/request-card/RequestCard";
 import Button from "src/components/common/button/Button";
+import API_ENDPOINTS from "src/api-endpoints";
+import axios from "axios";
+import { toast } from "react-toastify";
+
+type CompanyDetailsPageProps = {
+  companyId: string | number | undefined;
+  expressed_interest: boolean;
+  message?: string;
+};
 
 function CompanyDetailsPage() {
   const navigate = useNavigate();
+  const { id } = useParams()
   const [mainTabValue, setMainTabValue] = useState(0);
   const [bottomSheetTabValue, setBottomSheetTabValue] = useState(0);
   const [openSortDrawer, setOpenSortDrawer] = useState(false);
   const [openNoteDrawer, setOpenNoteDrawer] = useState(false);
   const [isCheckboxChecked, setIsCheckboxChecked] = useState(false);
+  const [companyDetails, setCompanyDetails] = useState<any>(null);
+  const [addCompanyRequestData, setAddCompanyRequestData] = useState<CompanyDetailsPageProps>();
+
+  useEffect(() => {
+    getCompanyDetails();
+  }, [id]);
 
   const handleCheckboxChange = (event: any) => {
     event.target.checked
@@ -26,7 +42,8 @@ function CompanyDetailsPage() {
   };
 
   const handleButtonClick = () => {
-    // navigate("/express-interest");
+    // setAddCompanyRequestData({ companyId: id, expressed_interest: true })
+    navigate("/express-interest",{ state: { company_id: id, expressed_interest: true }});
   };
 
   const handleChangeMainTabs = (
@@ -115,6 +132,18 @@ function CompanyDetailsPage() {
       ],
     },
   ];
+
+  const getCompanyDetails = async () => {
+    try {
+      const res = await axios.get(`${API_ENDPOINTS.get_company_details}/${id}`);
+      setCompanyDetails(res.data.data);
+    } catch (error: any) {
+      toast.error(error.response.data.message || "Failed to fetch company details.");
+    }
+  };
+
+  console.log(companyDetails);
+
   return (
     <>
       <header>
@@ -129,9 +158,9 @@ function CompanyDetailsPage() {
               </span>
               <div className={`${styles.companyIntro}`}>
                 <strong className={`${styles.companyName}`}>
-                  Banyan Nation
+                  {companyDetails?.name || 'Company Name'}
                 </strong>
-                <span className={`${styles.tag}`}>India</span>
+                <span className={`${styles.tag}`}>{companyDetails?.country || 'India'}</span>
               </div>
             </div>
           </div>
@@ -154,7 +183,8 @@ function CompanyDetailsPage() {
                   role="tabpanel"
                   hidden={mainTabValue !== 0}
                 >
-                  <div className={`${styles.overviewList}`}>
+                  <div dangerouslySetInnerHTML={{ __html: companyDetails?.content }} />
+                  {/* <div className={`${styles.overviewList}`}>
                     <div className={`${styles.cardItem}`}>
                       <div className={`${styles.cardHead}`}>
                         <h3 className={`${styles.cardTitle}`}>
@@ -261,7 +291,7 @@ function CompanyDetailsPage() {
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
                 <div
                   className={`${styles.tabPanel}`}
@@ -294,7 +324,7 @@ function CompanyDetailsPage() {
           </div>
           <div className="act-foot">
             <Button
-              // onClick={() => setOpenNoteDrawer(true)}
+              onClick={() => setOpenNoteDrawer(true)}
               btnStyle="primary"
             >
               Express Interest

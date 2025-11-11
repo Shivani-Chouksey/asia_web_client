@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom";
 
 export interface OpportunitiesCardData {
-  companyId: string;
-  companyName: string;
+  id: string;
+  name: string;
   companyLogo: string;
   companyLocation: string;
   // portfolioCount: number;
@@ -13,16 +13,17 @@ export interface OpportunitiesCardData {
 }
 
 function OpportunitiesCard(props: OpportunitiesCardData) {
+
   return (
     <div className="bs-portfolio-card typ-opportunities">
-      <Link to="/company-details">
+      <Link to={`/company-details/${props.id}`} >
         <div className="head-wrap">
           <div className="profile-wrap">
             <div className="profile-logo">
-              <img src={props.companyLogo} alt={props.companyName} />
+              <img src={props.companyLogo} alt={props.name} />
             </div>
             <div className="profile-cont">
-              <strong className="profile-name">{props.companyName}</strong>
+              <strong className="profile-name">{props.name}</strong>
               <div className="tag-wrap">
                 <span>{props.companyLocation}</span>
                 {/* {props.portfolioCount !== 0 ? (

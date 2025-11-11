@@ -2,6 +2,8 @@ import Header from "src/components/common/header/Header";
 import styles from "./style.module.scss";
 import { useState } from "react";
 import Button from "src/components/common/button/Button";
+import { getSocket } from "src/socketService";
+import SOCKET_EVENTS from "src/socketEvents";
 
 export interface NotificationItem {
   id: string;
@@ -60,6 +62,17 @@ function Notification() {
       itemType: "report",
     },
   ]);
+  const [notificationList, setNotificationList] = useState([])
+  const socket = getSocket()
+  if (socket) {
+    socket.on(SOCKET_EVENTS.PENDING_NOTIFICATION, (data:any) => {
+      console.log('SOCKET_EVENTS.COMPANY_REQ_NOTIFICATION', data);
+      setNotificationList(data)
+      // navigate("/chat-message-page", { state: data });
+
+    })
+  }
+
   let todayData: NotificationItem[] = [],
     olderData: NotificationItem[] = [];
   //   useEffect(() => {
@@ -97,9 +110,8 @@ function Notification() {
                     return (
                       <li
                         key={index}
-                        className={`${styles.item} ${
-                          item.isNew ? styles.typNew : ""
-                        }`}
+                        className={`${styles.item} ${item.isNew ? styles.typNew : ""
+                          }`}
                       >
                         <h3 className={`${styles.notificationTitle}`}>
                           {item.title}
@@ -140,8 +152,8 @@ function Notification() {
                               {item.itemType === "chat"
                                 ? "View Message"
                                 : item.itemType === "report"
-                                ? "View Report"
-                                : "View"}
+                                  ? "View Report"
+                                  : "View"}
                               <i className={`${styles.iconNext}`}></i>
                             </Button>
                           ) : (
@@ -166,9 +178,8 @@ function Notification() {
                     return (
                       <li
                         key={index}
-                        className={`${styles.item} ${
-                          item.isNew ? styles.typNew : ""
-                        }`}
+                        className={`${styles.item} ${item.isNew ? styles.typNew : ""
+                          }`}
                       >
                         <h3 className={`${styles.notificationTitle}`}>
                           {item.title}

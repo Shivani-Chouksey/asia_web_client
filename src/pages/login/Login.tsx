@@ -5,6 +5,9 @@ import Button from "src/components/common/button/Button";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as yup from "yup";
+import axios from "axios";
+import API_ENDPOINTS from '../../api-endpoints'
+import { toast } from "react-toastify";
 import SuccessError from "src/components/success-error/SuccessError";
 
 const validationSchema = yup.object({
@@ -29,10 +32,27 @@ function Login() {
       email: "",
     },
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      otpData.value = formik.values.email;
-      navigate("/otp", { state: otpData });
-    },
+    onSubmit: async (values) => {
+      try {
+        const res = await axios.post(API_ENDPOINTS.login, values, {
+          withCredentials: true
+        });
+
+        console.log("send otp", res.data);
+
+        otpData.value = formik.values.email;
+        navigate("/otp", { state: otpData });
+
+      } catch (error: any) {
+        if (error.response?.status === 401) {
+          toast.info("Email not registered. Please Singup First- Redirecting to Sign Up.");
+          navigate('/signup');
+        } else {
+          console.error("Login error:", error);
+          // Optionally show a toast or error message
+        }
+      }
+    }
   });
   return (
     <>

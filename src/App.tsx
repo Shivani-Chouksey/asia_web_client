@@ -1,5 +1,5 @@
 import "./App.css";
-import { Route, Routes, useLocation } from "react-router-dom";
+import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
 import ImpactPage from "./pages/impact/ImpactPage";
 import PortfolioPage from "./pages/portfolio/PortfolioPage";
 import OpportunitiesPage from "./pages/opportunities/OpportunitiesPage";
@@ -69,17 +69,104 @@ import Exploration from "./components/exploration/Exploration";
 import AccountPersonalDetails from "./pages/account-personal-details/AccountPersonalDetails";
 import AccountIdentityDetails from "./pages/account-identity-details/AccountIdentityDetails";
 import AccountResidenceDetails from "./pages/account-residence-details/AccountResidenceDetails";
+import { getSocket, initSocket } from "./socketService";
+import { useEffect, useState } from "react";
+import SOCKET_EVENTS, { SOCKET_URL } from "./socketEvents";
+import { toast } from "react-toastify";
 // import ExplorePage from "./pages/explore-page/ExplorePage";
 
 function App() {
+  const [notifications, setNotifications] = useState([]);
+
   const { pathname } = useLocation();
+  const token = sessionStorage.getItem('access_token');
+  const userId = sessionStorage.getItem('user_id');
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (token) {
+      initSocket(token)
+        .then((socket) => {
+          // ✅ Listen for events only after successful connection
+          socket.on(SOCKET_EVENTS.COMPANY_REQ_NOTIFICATION, (data: any) => {
+            console.log('Company Request Notification:', data);
+            navigate('/chat-message-page', { state: data });
+          });
+          socket.on(SOCKET_EVENTS.CHAT_STARTED, (data: any) => {
+            console.log(SOCKET_EVENTS.CHAT_STARTED, data);
+
+
+          })
+          socket.on('new_message', (data: any) => {
+            console.log('new_message', data);
+          })
+
+          socket.on('user_joined', (data) => {
+            console.log("user_joined",data); // or update UI
+          });
+
+        })
+        .catch((err) => {
+          console.error('Socket init failed:', err.message);
+          navigate('/login'); // Redirect on auth failure
+        });
+    } else {
+      // navigate('/login'); // No token → redirect
+    }
+  }, [token, navigate]);
+
+
+
+  // useEffect(() => {
+  //   const db_name = 'asia_impact'
+  //   const db_version = 1
+
+  //   const request = indexedDB.open(db_name, db_version);
+
+  //   request.onerror = (event) => {
+  //     console.error("Error opening IndexedDB:", event);
+  //   };
+
+  //   request.onsuccess = (event: any) => {
+  //     const db = event.target.result;
+  //     const transaction = db.transaction(['notifications'], 'readonly');
+  //     const store = transaction.objectStore('notifications');
+
+  //     const getAllRequest = store.getAll();
+  //     console.log("getAllRequest", getAllRequest);
+
+  //     getAllRequest.onsuccess = () => {
+  //       setNotifications(getAllRequest.result);
+  //     };
+
+  //     getAllRequest.onerror = (err: any) => {
+  //       console.error("Error reading notifications:", err);
+  //     };
+  //   };
+  // }, []);
+
+
+
+
+  // useEffect(() => {
+  //   if (notifications.length) {
+  //     navigate("/chat-message-page", { state: notifications });
+
+  //   }
+
+  // }, [notifications])
+
+  // socket.on(SOCKET_EVENTS.CHAT_STARTED, (data) => {
+  //     navigate('/chat-details', { state: data })
+
+  //   })
   return (
     <>
       {pathname === "/impact" ||
-      pathname === "/select-client" ||
-      pathname === "/portfolios" ||
-      pathname === "/opportunities" ||
-      pathname === "/chat" ? (
+        pathname === "/select-client" ||
+        pathname === "/portfolios" ||
+        pathname === "/opportunities" ||
+        pathname === "/chat" ? (
         <header>
           <Header
             showProfile={true}
@@ -140,7 +227,7 @@ function App() {
         <Route path="/portfolios" element={<PortfolioPage />}></Route>
         <Route path="/portfolio-detail" element={<PortfolioDetail />}></Route>
         <Route path="/opportunities" element={<OpportunitiesPage />}></Route>
-        <Route path="/company-details" element={<CompanyDetailsPage />}></Route>
+        <Route path="/company-details/:id" element={<CompanyDetailsPage />}></Route>
         <Route path="/chat" element={<ChatPage />}></Route>
         <Route path="/highlights" element={<HighlightPage />}></Route>
         <Route path="/highlight-list" element={<HighlightListing />}></Route>
@@ -201,10 +288,10 @@ function App() {
       </Routes>
 
       {pathname === "/impact" ||
-      pathname === "/select-client" ||
-      pathname === "/portfolios" ||
-      pathname === "/opportunities" ||
-      pathname === "/chat" ? (
+        pathname === "/select-client" ||
+        pathname === "/portfolios" ||
+        pathname === "/opportunities" ||
+        pathname === "/chat" ? (
         <footer>
           <NavBar></NavBar>
         </footer>

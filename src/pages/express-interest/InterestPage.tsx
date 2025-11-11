@@ -2,13 +2,24 @@ import Header from "src/components/common/header/Header";
 import styles from "./style.module.scss";
 import { FormControl, TextField } from "@mui/material";
 import Button from "src/components/common/button/Button";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { toast } from "react-toastify";
+import axios from "axios";
+import API_ENDPOINTS from "src/api-endpoints";
+
+type InterestState = {
+  companyId: string;
+  expressed_interest: boolean;
+}
 
 function InterestPage() {
   const navigate = useNavigate();
   const maxLength = 180;
   const [inputValue, setInputValue] = useState("");
+  const location = useLocation();
+  const data: InterestState = location.state;
+  const authToken = sessionStorage.getItem("access_token") || "";
 
   const handleInputChange = (event: any) => {
     const value = event.target.value;
@@ -17,8 +28,33 @@ function InterestPage() {
     }
   };
 
-  const handleClick = () => {
-    navigate("/chat-message-page");
+  const handleClick = async () => {
+    try {
+      const res = await axios.post(
+        API_ENDPOINTS.add_company_request,
+        { ...data, message: inputValue },
+        {
+          headers: {
+            Authorization: `Bearer ${authToken}`
+          }
+        }
+      );
+      console.log("res", res);
+
+      toast.success("Your interest has been expressed successfully.");
+      navigate("/chat");
+
+    } catch (error: any) {
+      console.log(error);
+      
+      toast.error(`${error.response?.data.message}- Please login to access ` || "Something went wrong. Please try again.");
+      if (error.response.data.statusCode === 401) {
+        navigate('/login')
+      // navigate("/chat-message-page");
+
+        sessionStorage.removeItem('access_token');
+      }
+    }
   };
 
   return (
