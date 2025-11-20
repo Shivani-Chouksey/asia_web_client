@@ -2,12 +2,30 @@ import Header from "src/components/common/header/Header";
 import styles from "./style.module.scss";
 import Button from "src/components/common/button/Button";
 import BottomSheet from "src/components/bottom-sheet/BottomSheet";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { getSocket } from "src/socketService";
+import SOCKET_EVENTS from "src/socketEvents";
+import axios from "axios";
+import API_ENDPOINTS from "src/api-endpoints";
+import { toast } from "react-toastify";
 
 function ConfirmRequest() {
   const navigate = useNavigate();
+  const location = useLocation()
   const [openRejectDrawer, setOpenRejectDrawer] = useState(false);
+  const requestData = location.state
+  console.log("confirm req data ", location.state);
+  const AcceptRejectReqHandler = async (req_status: string) => {
+    try {
+      console.log('req_status', req_status);
+
+      const res = await axios.post(API_ENDPOINTS.approve_ai_officer_req, { company_req_id: requestData.data.id, req_status },{headers:{Authorization:`Bearer ${sessionStorage.getItem('access_token')}`}})
+    } catch (error: any) {
+      toast.error(error.response.data.message)
+    }
+  }
+
 
   return (
     <>
@@ -52,11 +70,12 @@ function ConfirmRequest() {
               btnStyle="secondary"
               onClick={() => {
                 setOpenRejectDrawer(true);
+                AcceptRejectReqHandler('rejected')
               }}
             >
               Reject
             </Button>
-            <Button btnStyle="primary">Confirm</Button>
+            <Button btnStyle="primary" onClick={() => AcceptRejectReqHandler('accepted')}>Confirm</Button>
           </div>
         </div>
       </main>

@@ -6,13 +6,13 @@ export interface OpportunitiesCardData {
   companyLogo: string;
   companyLocation: string;
   // portfolioCount: number;
-  activeRequests: number;
+  activeReqCount: number;
   ebidta: string;
   turnover: string;
   lastTradePrice: string;
 }
 
-function OpportunitiesCard(props: OpportunitiesCardData) {
+function OpportunitiesCard(props: any) {
 
   return (
     <div className="bs-portfolio-card typ-opportunities">
@@ -36,7 +36,7 @@ function OpportunitiesCard(props: OpportunitiesCardData) {
           </div>
           <div className="active-requests">
             <span className="label">Active Requests:</span>
-            <span className="value">{props.activeRequests}</span>
+            <span className="value">{props.activeReqCount}</span>
           </div>
         </div>
         <div className="foot-wrap">

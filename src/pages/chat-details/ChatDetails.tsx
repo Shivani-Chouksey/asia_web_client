@@ -7,6 +7,9 @@ import Button from "src/components/common/button/Button";
 import BottomSheet from "src/components/bottom-sheet/BottomSheet";
 import { getSocket } from "src/socketService";
 import SOCKET_EVENTS from "src/socketEvents";
+import axios from "axios";
+import API_ENDPOINTS from "src/api-endpoints";
+import { toast } from "react-toastify";
 
 function ChatDetails() {
   const navigate = useNavigate();
@@ -14,24 +17,49 @@ function ChatDetails() {
   const [value, setValue] = useState(0);
   const [messages, setMessages] = useState<any>([])
   const [message, setMessage] = useState('');
+  const [newMessage, setNewMessage] = useState<boolean>(false);
+
+
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
   };
   const roomDetail = location.state;
   console.log("roomDetail", roomDetail);
+  const authToken = sessionStorage.getItem('access_token')
 
   const socket = getSocket();
   useEffect(() => {
-
     if (roomDetail?.initialMessage) {
-      setMessages((prev: any) => [...prev, roomDetail.initialMessage]);
+      // setMessages((prev: any) => [...prev, roomDetail.initialMessage]);
+      console.log(" roomDetail.roomId", roomDetail.roomId);
       socket?.emit(SOCKET_EVENTS.JOIN_ROOM, roomDetail.roomId);
     }
+    getActiveReqChatHistory()
+  }, [roomDetail, newMessage]);
 
-  }, [roomDetail]);
+  const getActiveReqChatHistory = async () => {
+    try {
+      const res = await axios.get(`${API_ENDPOINTS.get_active_req_chat_history}/${roomDetail?.company_req_id}`, {
+        headers: {
+          Authorization: `Bearer ${authToken}`
+        }
+      })
+      setMessages(res.data.data)
+    } catch (error: any) {
+      toast.error(error.response.data.message)
+    }
+  }
+  const handleClick = async () => {
+    try {
+      const res = await axios.post(API_ENDPOINTS.req_ai_officer, { company_req_id: roomDetail.company_req_id }, { headers: { Authorization: `Bearer ${sessionStorage.getItem('access_token')}` } });
+      if (res.status === 200) {
+        navigate("/chat-confirm-request");
+        toast.info('AI Officer Req Intilized Successfully ,Please Waiting for approval')
+      }
 
-  const handleClick = () => {
-    navigate("/chat-confirm-request");
+    } catch (error: any) {
+      toast.error(error.response.data.message)
+    }
   };
   console.log("messages list", messages);
 
@@ -46,8 +74,16 @@ function ChatDetails() {
     console.log("SOCKET_EVENTS.SEND_MESSAGE payload --> ", payload);
     if (socket) {
       console.log(SOCKET_EVENTS.SEND_MESSAGE);
-      
+
       socket.emit(SOCKET_EVENTS.SEND_MESSAGE, payload);
+      setNewMessage((prev) => !prev)
+      // // setNewMessage((prev) => !prev)
+      // socket.on('new_message', (data: any) => {
+      //   console.log('new_message', data);
+      //   data && 
+      // })
+      console.log("setNewMessage", newMessage);
+
     }
 
     setMessage('');
@@ -86,8 +122,11 @@ function ChatDetails() {
             </div>
             <ul className={`${styles.list}`}>
               {
-                messages.length ? messages.map((msg: any,index:number) => {
-                  const sendor = msg.sender_id === sessionStorage.getItem('user_id')
+                messages.length ? messages.map((msg: any, index: number) => {
+                  const sendor = msg.sender_id == sessionStorage.getItem('user_id');
+                  const createdAt = new Date(msg.createdAt).toLocaleTimeString()
+                  console.log("sendor", sendor);
+
                   return <li key={index} className={`${styles.item}  ${sendor ? styles.send : styles.receive}`}>
                     <div className={`${styles.wrap}`}>
                       <p className={`${styles.text}`}>
@@ -99,7 +138,7 @@ function ChatDetails() {
                         }
                       </p>
                     </div>
-                    <span className={`${styles.time}`}>23:56</span>
+                    <span className={`${styles.time}`}>{createdAt}</span>
                   </li>
                 }) : <p>No Message Found</p>
               }

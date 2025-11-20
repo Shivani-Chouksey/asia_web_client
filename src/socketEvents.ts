@@ -10,7 +10,8 @@ export const SOCKET_EVENTS = {
     ACCEPT_CHAT:'accept_chat',
     REJECT_CHAT:'reject_chat',
     CHAT_STARTED:'chat_started',
-    SEND_MESSAGE:'send_message'
+    SEND_MESSAGE:'send_message',
+    AI_OFFICER_REQ_INTIATE:'ai_officer_req_intilaized'
     
 };
 export const SOCKET_URL = 'http://localhost:5000';

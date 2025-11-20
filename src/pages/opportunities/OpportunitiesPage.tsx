@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 function OpportunitiesPage() {
   const [opportunitiesCards, setOpportunitiesCards] = useState<
-    OpportunitiesCardData[]
+    any[]
   >([
     {
       id: "001",

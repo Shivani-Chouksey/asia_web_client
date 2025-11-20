@@ -3,9 +3,20 @@ import styles from "./style.module.scss";
 
 function RequestCard(props: any) {
   const navigate = useNavigate()
+  const chatStartPayload = {
+    company_req_id: props.id,
+    roomId: props.room_id,
+  };
   const btnClickHandler = () => {
-    navigate('/chat-details', { state: props })
+    if (props.accept_req === true && props.status === "chat_active") {
+      navigate('/chat-details', { state: chatStartPayload })
+    } else {
+      navigate('/chat-message-page', { state: props })
+    }
+
   }
+  console.log("RequestCard", props);
+  const createdDate = new Date(props.createdAt).toLocaleDateString()
   return (
     <div className={`${styles.cardWrap} `}>
       <div className={`${styles.headWrap}`}>
@@ -14,13 +25,16 @@ function RequestCard(props: any) {
           {props.requesterInfo?.email}
           {/* {props.companyInfo?.name} */}
         </span>
-        <span className={`${styles.date}`}>{props.createdAt}</span>
+        <span className={`${styles.date}`}>{createdDate}</span>
       </div>
       <div className={`${styles.footWrap}`}>
         <p className={`${styles.cardDesc}`}>
           {props.message}
         </p>
-        <button className="cm-chat-btn" onClick={btnClickHandler}>Chat</button>
+        {
+          (props.requester_id != sessionStorage.getItem('user_id') || props.accept_req === true) && <button className="cm-chat-btn" onClick={btnClickHandler}>Chat</button>
+
+        }
       </div>
     </div>
   );

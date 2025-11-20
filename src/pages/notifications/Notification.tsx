@@ -1,9 +1,11 @@
 import Header from "src/components/common/header/Header";
 import styles from "./style.module.scss";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "src/components/common/button/Button";
 import { getSocket } from "src/socketService";
 import SOCKET_EVENTS from "src/socketEvents";
+import axios from "axios";
+import API_ENDPOINTS from "src/api-endpoints";
 
 export interface NotificationItem {
   id: string;
@@ -62,38 +64,56 @@ function Notification() {
       itemType: "report",
     },
   ]);
-  const [notificationList, setNotificationList] = useState([])
+  const [notificationList, setNotificationList] = useState<any[]>([])
   const socket = getSocket()
-  if (socket) {
-    socket.on(SOCKET_EVENTS.PENDING_NOTIFICATION, (data:any) => {
-      console.log('SOCKET_EVENTS.COMPANY_REQ_NOTIFICATION', data);
-      setNotificationList(data)
-      // navigate("/chat-message-page", { state: data });
+  // if (socket) {
+  socket?.on(SOCKET_EVENTS.PENDING_NOTIFICATION, (data: any) => {
+    console.log('SOCKET_EVENTS.COMPANY_REQ_NOTIFICATION', data);
+    // setNotificationList(data)
+    // navigate("/chat-message-page", { state: data });
 
-    })
+  })
+  // }
+
+  useEffect(() => {
+    getAllNotificationList()
+  }, [])
+  const token = sessionStorage.getItem('access_token')
+  const getAllNotificationList = async () => {
+    try {
+      const res = await axios.get(API_ENDPOINTS.get_all_notification, { headers: { Authorization: `Bearer ${token}` } });
+      setNotificationList(res.data.data)
+
+    } catch (error) {
+      console.log(error);
+
+    }
   }
 
-  let todayData: NotificationItem[] = [],
-    olderData: NotificationItem[] = [];
+
+  let todayData: any[] = [],
+    olderData: any[] = [];
   //   useEffect(() => {
   let todayDate = new Date();
-  todayData = notificationData.filter((item) => {
-    const temp = new Date(item.timestamp);
+  todayData = notificationList.length > 0 ? notificationList.filter((item: any) => {
+    const temp = new Date(item.createdAt);
     return (
       todayDate.getFullYear() === temp.getFullYear() &&
       todayDate.getMonth() === temp.getMonth() &&
       todayDate.getDate() === temp.getDate()
     );
-  });
-  olderData = notificationData.filter((item) => {
-    const temp = new Date(item.timestamp);
+  }) : [];
+  olderData = notificationList.length > 0 ? notificationList.filter((item: any) => {
+    const temp = new Date(item.createdAt);
     return (
       todayDate.getFullYear() !== temp.getFullYear() ||
       todayDate.getMonth() !== temp.getMonth() ||
       todayDate.getDate() !== temp.getDate()
     );
-  });
+  }) : [];
   //   }, []);
+  console.log(todayData, olderData);
+
   return (
     <>
       <header>
@@ -182,27 +202,28 @@ function Notification() {
                           }`}
                       >
                         <h3 className={`${styles.notificationTitle}`}>
-                          {item.title}
+                          {item.type}
                         </h3>
-                        <p className={`${styles.notificationDesc}`}>
-                          {item.description}
-                        </p>
-                        {item.itemType === "chat" ? (
+                        {/* <p className={`${styles.notificationDesc}`}>
+                          {item.messageFromSendor.content}
+                        </p> */}
+                        {item.type === "chat_started" ? (
                           <div className={`${styles.requestCard}`}>
                             <div className={`${styles.headWrap}`}>
-                              <strong>{item.porfolioName}</strong>
-                              {item.inPortfolio ? (
-                                <span className={`${styles.tag}`}>
-                                  In Portfolio
-                                </span>
-                              ) : (
+                              <strong>{item.CompanyReqInfo.companyInfo.name}</strong>
+                              {/* {item.inPortfolio ? ( */}
+                              <span className={`${styles.tag}`}>
+                                In Portfolio
+                              </span>
+                              {/* ) : (
                                 ""
-                              )}
+                              )} */}
                             </div>
                             <div className={`${styles.footWrap}`}>
                               <p className={`${styles.cardDesc}`}>
-                                Sure, I can revise it. Do you have a quote in
-                                mind?
+                                {/* Sure, I can revise it. Do you have a quote in
+                                mind? */}
+                                {item.CompanyReqInfo.message}
                               </p>
                             </div>
                           </div>

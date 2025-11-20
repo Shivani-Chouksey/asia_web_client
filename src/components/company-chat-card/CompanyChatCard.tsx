@@ -19,8 +19,9 @@ export interface CompanyChatCardData {
 }
 
 function CompanyChatCard(props: any) {
-  console.log("props value inside companychatcard",props);
-  
+  console.log("props value inside companychatcard", props);
+  const createdDate = new Date(props.createdAt).toLocaleDateString()
+
   return (
     <div className="bs-portfolio-card typ-chat">
       <div className="head-wrap">
@@ -28,30 +29,38 @@ function CompanyChatCard(props: any) {
           <div className="profile-logo">
             <img src={props.companyLogo} alt={props.companyInfo?.name} />
           </div>
+          
           <div className="profile-cont">
             <strong className="profile-name">{props.companyInfo?.name}</strong>
-            {props.cardType !== "incoming" ? (
-              <div className="tag-wrap">
-                <span>{props.companyInfo?.location || 'India'}</span>
-              </div>
-            ) : (
+            {/* {props.cardType !== "incoming" ? ( */}
+            <div className="tag-wrap">
+              <span>{props.companyInfo?.location || 'India'}</span>
+            </div>
+            {/* ) : (
               ""
-            )}
+            )} */}
           </div>
+          
         </div>
-        {props.cardType === "incoming" ? (
-          <span className="bid-date">{props.createdAt}</span>
-        ) : (
+        {/* {props.cardType === "incoming" ? ( */}
+        <span className="bid-date">{createdDate}</span>
+        {/* ) : (
           ""
-        )}
-        {props.cardType === "outgoing" ? (
-          <div className={`${styles.holdingValueWrap}`}>
-            <span className={`${styles.label}`}>Holdings</span>
-            <span className={`${styles.value}`}>{props.holdingCount} DRs</span>
-          </div>
-        ) : (
+        )} */}
+        {/* {props.cardType === "outgoing" ? ( */}
+        <div className={`${styles.holdingValueWrap}`}>
+          <span className={`${styles.label}`}>Holdings</span>
+          <span className={`${styles.value}`}>{props.holdingCount} DRs</span>
+        </div>
+        {/* ) : (
           ""
-        )}
+        )} */}
+        
+      </div>
+      <div className="foot-wrap">
+         <p className={`${styles.cardDesc}`}>
+          {props.message}
+        </p>
       </div>
       {/* {props.cardType === "chat" ? (
         <div className="foot-wrap">
@@ -71,29 +80,29 @@ function CompanyChatCard(props: any) {
       ) : (
         <></>
       )} */}
-      <div
-        className={`seller-wrap ${
-          props.interestedProfile?.length === 0 ? "disabled" : ""
-        }`}
-      >
-        <Accordion
-          className="bs-accordion"
-          defaultExpanded={true}
-          disabled={props.interestedProfile?.length === 0}
+      {
+        (props.status === 'chat_active' || props.requester_id != sessionStorage.getItem('user_id')) && <div
+          className={`seller-wrap ${props.interestedProfile?.length === 0 ? "disabled" : ""
+            }`}
         >
-          <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
-            <div className="seller-head">
-              <strong>
-                Chats
-                <span className="request-count">
-                  {props.interestedProfile?.length}
-                </span>
-              </strong>
-            </div>
-          </AccordionSummary>
-         <RequestCard {...props}></RequestCard>
+          <Accordion
+            className="bs-accordion"
+            defaultExpanded={true}
+            disabled={props.interestedProfile?.length === 0}
+          >
+            <AccordionSummary aria-controls="panel2a-content" id="panel2a-header">
+              <div className="seller-head">
+                <strong>
+                  Chats
+                  <span className="request-count">
+                    {props.interestedProfile?.length}
+                  </span>
+                </strong>
+              </div>
+            </AccordionSummary>
+            <RequestCard {...props}></RequestCard>
 
-          {/* {props.interestedProfile?.length !== 0 ? (
+            {/* {props.interestedProfile?.length !== 0 ? (
             <AccordionDetails>
               <div className="seller-cont">
                 <ul className="list">
@@ -104,8 +113,10 @@ function CompanyChatCard(props: any) {
           ) : (
             <></>
           )} */}
-        </Accordion>
-      </div>
+          </Accordion>
+        </div>
+      }
+
     </div>
   );
 }

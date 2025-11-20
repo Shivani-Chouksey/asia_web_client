@@ -90,7 +90,7 @@ function App() {
           // ✅ Listen for events only after successful connection
           socket.on(SOCKET_EVENTS.COMPANY_REQ_NOTIFICATION, (data: any) => {
             console.log('Company Request Notification:', data);
-            navigate('/chat-message-page', { state: data });
+            navigate('/chat-message-page', { state: data.data });
           });
           socket.on(SOCKET_EVENTS.CHAT_STARTED, (data: any) => {
             console.log(SOCKET_EVENTS.CHAT_STARTED, data);
@@ -102,9 +102,15 @@ function App() {
           })
 
           socket.on('user_joined', (data) => {
-            console.log("user_joined",data); // or update UI
+            console.log("user_joined", data); // or update UI
           });
 
+
+
+          socket?.on(SOCKET_EVENTS.AI_OFFICER_REQ_INTIATE, (data) => {
+            console.log('SOCKET_EVENTS.AI_OFFICER_REQ_INTIATE', data);
+            navigate('chat-confirm-request', { state: data })
+          })
         })
         .catch((err) => {
           console.error('Socket init failed:', err.message);

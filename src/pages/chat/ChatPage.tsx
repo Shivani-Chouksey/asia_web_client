@@ -128,7 +128,6 @@ function ChatPage() {
           Authorization: `Bearer ${authToken}`
         }
       })
-      console.log("Company requests fetcheddd:", res.data);
       setCompanyList(res.data.data)
     } catch (error: any) {
       console.error("Error fetching company requests:", error);
@@ -157,6 +156,9 @@ function ChatPage() {
   //  const outgoingReq = companyList.filter((obj:any) => {
   //   return obj.outgoingReq
   // });
+
+  console.log("Company requests fetcheddd:", companyList);
+
   return (
     <div className="lyt-main typ-main">
       <section>
@@ -174,6 +176,7 @@ function ChatPage() {
                   role="tabpanel"
                   hidden={value !== 0}
                 >
+                  <p> <b>Total Req Count</b>- {companyList.outgoingReq?.length}</p>
                   <div className={`${styles.bidsList}`}>
                     {companyList.outgoingReq && companyList.outgoingReq.map((item: any, index: number) => {
                       return (
@@ -189,14 +192,9 @@ function ChatPage() {
                   role="tabpanel"
                   hidden={value !== 1}
                 >
+                  <p> <b>Total Req Count</b>- {companyList.incomingReq?.length}</p>
+
                   <div className={`${styles.bidsList}`}>
-                    {/* {outgoingCard.map((item, index) => {
-                      return (
-                        <div key={index} className={`${styles.item}`}>
-                          <CompanyChatCard {...item}></CompanyChatCard>
-                        </div>
-                      );
-                    })} */}
                     {companyList.incomingReq && companyList.incomingReq.map((item: any, index: number) => {
                       return (
                         <div key={index} className={`${styles.item}`}>
@@ -211,8 +209,10 @@ function ChatPage() {
                   role="tabpanel"
                   hidden={value !== 2}
                 >
+                  <p style={{ marginBottom: "2px" }}> <b>Total Req Count</b> - {companyList.pendingReq?.length}</p>
+
                   <div className={`${styles.bidsList}`}>
-                    {companyList.pendingReq && companyList.incomingReq.map((item: any, index: number) => {
+                    {companyList.pendingReq && companyList.pendingReq.map((item: any, index: number) => {
                       return (
                         <div key={index} className={`${styles.item}`}>
                           <RequestCard {...item}></RequestCard>

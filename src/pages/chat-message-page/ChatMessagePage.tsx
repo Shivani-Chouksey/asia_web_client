@@ -33,7 +33,7 @@ function ChatMessagePage() {
       return;
     } else {
       const data = {
-        company_req_id: notificationData.data.id,
+        company_req_id: notificationData.id,
         chat_note_accept_status: true
       }
        // Emit ACCEPT_CHAT to server
@@ -82,17 +82,17 @@ function ChatMessagePage() {
                           </span>
                           <div className={styles.companyIntro}>
                             <strong className={styles.companyName}>
-                              {notificationData.data.companyInfo?.name}
+                              {notificationData?.companyInfo?.name}
                             </strong>
                             <span className={styles.tag}>
-                              {notificationData.data.companyInfo?.type || 'India'}
+                              {notificationData?.companyInfo?.type || 'India'}
                             </span>
                           </div>
                         </div>
                         <span className={styles.cardTag}>new</span>
                       </div>
                       <div className={styles.cardFoot}>
-                        <p className={styles.desc}>{notificationData.data.message}</p>
+                        <p className={styles.desc}>{notificationData?.message}</p>
                       </div>
                     </div>
                   </div>
